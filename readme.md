@@ -1,27 +1,27 @@
-#Stimmbezirk
+#Wahlgebiet
 
-Der Service Stimmbezirk liest das Shape-File für die Stimmbezirke von [Stimmbezirke zur Bundestagswahl](http://www.offenedaten-koeln.de/dataset/stimmbezirk) aus und bietet die so gewonnen Informationen als GeoJson - Information an.
+Das Projekt _wahlgebiet_ stellt Informationen zum Wahlgebiet zur Verfügung. Die Grundlage bieten Resourcen von den [Offenen Daten Köln](https://www.offenedaten-koeln.de/). Zunächst werden die Information zu Stimmbezirk und Wahllokal zur Verfügung gestellt. Perspektivisch sind aber auch Informationen zu Landtagswahlkreis, Stadtteilen und Stadtbezirken möglich. 
 
-## Entwicklungsstand
+## Stimmbezirk
+
+Der Stimmbezirk ist die kleinste "organisatorische Einheit bei politischen Wahlen" (vgl. Wikipedia [Wahlbezirk](https://de.wikipedia.org/wiki/Wahlbezirk)). Grundlage für den Service _/wahlgebiet/service/stimmbezirke_ ist der Datensatz [Stimmbezirke zur Bundestagswahl](https://www.offenedaten-koeln.de/dataset/stimmbezirk). Zur Verwendung in Webapplikationen werden die Informationen dieses Datensatzes in das [GeoJson](http://geojson.org/) Format umgewandelt.
+
+# Entwicklungsstand
 
 Dieser Service ist in Entwicklung.
 
-## Vorgehensweise
+# Schnittstellen
 
-Der Service geht folgendermaßen vor:
+## /wahlgebiet/service/stimmbezirke
 
-1. Download der ZIP-Datei in das temporäre Verzeichnis des verwendeten Betriebssystems
-2. Entpacken der im ZIP-File vorhanden Dateien
-3. Einlesen des shapes
-4. ggf. Filtern nach Flächentyp
-5. Umwandeln der Projektion
-6. Umwandeln in GeoJson
+Der Service _/wahlgebiet/service/stimmbezirke_ liefert alle Stimmbezirke im GeoJson Format.
 
-## Schnittstellen
+# Installation
 
-## Installation
+1. git clone
+2. mvn clean install
+3. jetty run
 
-
-## License
+# License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>.
