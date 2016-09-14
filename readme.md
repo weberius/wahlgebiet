@@ -16,6 +16,12 @@ Dieser Service ist in Entwicklung.
 
 Der Service _/wahlgebiet/service/stimmbezirke_ liefert alle Stimmbezirke im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke) zu Benutzung zur Verfügung. Einen grafischen Überblick liefert [https://tom.cologne.codefor.de/wahlgebiet/](https://tom.cologne.codefor.de/wahlgebiet/).
 
+## /wahlgebiet/service/wahllokale
+
+Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson Format Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale](https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale) zur Benutzung zur Verfügung. 
+
+ACHTUNG: Der Service liefert noch keine zuverlässigen Daten.
+
 # Installation
 
 1. git clone

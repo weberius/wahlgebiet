@@ -1,4 +1,4 @@
-package de.illilli.opendata.service.wahlgebiet;
+package stimmbezirk;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -8,6 +8,8 @@ import org.geotools.geojson.feature.FeatureJSON;
 import org.geotools.geojson.geom.GeometryJSON;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import de.illilli.opendata.service.wahlgebiet.GeoJsonTransformer;
 
 public class GeoToolsGeoJsonTransformer implements GeoJsonTransformer {
 

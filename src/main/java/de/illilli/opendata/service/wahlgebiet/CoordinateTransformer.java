@@ -31,7 +31,7 @@ public class CoordinateTransformer {
 	public CoordinateTransformer(final SimpleFeatureSource featureSource) throws IOException,
 			NoSuchAuthorityCodeException, FactoryException, MismatchedDimensionException, TransformException {
 		this.featureSource = featureSource;
-		featureCollection = featureSource.getFeatures();
+		this.featureCollection = featureSource.getFeatures();
 	}
 
 	public SimpleFeatureCollection transform(final SimpleFeatureCollection featureCollection)
@@ -49,7 +49,8 @@ public class CoordinateTransformer {
 
 		CoordinateReferenceSystem dataCRS = schema.getCoordinateReferenceSystem();
 		CRSAuthorityFactory factory = CRS.getAuthorityFactory(true);
-		CoordinateReferenceSystem newCRS = factory.createCoordinateReferenceSystem(Config.getProperty("epsg.code"));
+		CoordinateReferenceSystem newCRS = factory
+				.createCoordinateReferenceSystem(Config.getProperty("epsg.code.4326"));
 
 		boolean lenient = true; // allow for some error due to different datums
 		MathTransform transform = CRS.findMathTransform(dataCRS, newCRS, lenient);
