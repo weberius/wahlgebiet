@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import org.geotools.feature.SchemaException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.FactoryException;
@@ -21,6 +22,7 @@ public class GeoJsonWahllokalFacadeTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGeoJsonWahllokalFacade() throws URISyntaxException, IOException, SchemaException,
 			NoSuchAuthorityCodeException, FactoryException, MismatchedDimensionException, TransformException {
 		Facade facade = new GeoJsonWahllokalFacade();
