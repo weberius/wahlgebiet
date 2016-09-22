@@ -30,7 +30,15 @@ $.getJSON("/wahlgebiet/service/stimmbezirke?geojson", function(data) {
 	
 });
 
-var wahllokalLayer = L.geoJson(null);
+var wahllokalLayer = L.geoJson(null, {
+	onEachFeature: function(feature, layer) {
+		var text = ""
+			+ "<b>" + feature.properties.WLK_NAME + "</b></br>"
+			+ feature.properties.WLK_ADRESSE + "</br>"
+			+ feature.properties.POSTZUSTELLBEZIRK + " K&ouml;ln</br>";
+		layer.bindPopup(text);
+	}
+});
 		
 $.getJSON("/wahlgebiet/service/wahllokale?geojson", function(data) {
 	wahllokalLayer.addData(data);
