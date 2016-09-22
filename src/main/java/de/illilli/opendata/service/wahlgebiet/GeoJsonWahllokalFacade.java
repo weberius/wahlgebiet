@@ -86,6 +86,9 @@ public class GeoJsonWahllokalFacade implements Facade {
 
 			Map<String, Object> properties = new Hashtable<String, Object>();
 			properties.put("WLK_NAME", csv.wlk_name);
+			properties.put("WLK_ADRESSE", csv.wlk_adresse);
+			properties.put("POSTZUSTELLBEZIRK", csv.postzustellbezirk);
+
 			feature.setProperties(properties);
 
 			featureList.add(feature);
