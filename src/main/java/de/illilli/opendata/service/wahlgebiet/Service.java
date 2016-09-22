@@ -45,8 +45,8 @@ public class Service {
 	/**
 	 * Example:
 	 * <p>
-	 * <a href="http://localhost:8080/wahlgebiet/service/stimmbezirke">
-	 * /wahlgebiet/service/stimmbezirke</a>
+	 * <a href="http://localhost:8080/wahlgebiet/service/stimmbezirke?geojson">
+	 * /wahlgebiet/service/stimmbezirke?geojson</a>
 	 * </p>
 	 * 
 	 * @return
@@ -73,8 +73,8 @@ public class Service {
 	/**
 	 * Example:
 	 * <p>
-	 * <a href="http://localhost:8080/wahlgebiet/service/wahllokale">
-	 * /wahlgebiet/service/wahllokale</a>
+	 * <a href="http://localhost:8080/wahlgebiet/service/wahllokale?geojson">
+	 * /wahlgebiet/service/wahllokale?geojson</a>
 	 * </p>
 	 * 
 	 * 
