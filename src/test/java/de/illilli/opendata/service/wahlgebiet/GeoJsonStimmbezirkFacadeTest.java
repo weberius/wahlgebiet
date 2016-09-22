@@ -2,8 +2,10 @@ package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +29,16 @@ public class GeoJsonStimmbezirkFacadeTest {
 		GeoJsonStimmbezirkeFacade facade = new GeoJsonStimmbezirkeFacade(url);
 		String json = facade.getJson();
 		Assert.assertTrue(json.contains("FeatureCollection"));
+	}
+
+	@Test
+	public void testForContent() throws MismatchedDimensionException, NoSuchAuthorityCodeException, IOException,
+			FactoryException, TransformException {
+		GeoJsonStimmbezirkeFacade facade = new GeoJsonStimmbezirkeFacade(url);
+		InputStream inputStream = this.getClass().getResourceAsStream("/stimmbezirke.json");
+		String expected = IOUtils.toString(inputStream);
+		String actual = facade.getJson();
+		Assert.assertEquals(expected, actual);
 	}
 
 }
