@@ -12,9 +12,8 @@ import org.geojson.Feature;
 import org.geojson.FeatureCollection;
 import org.geojson.LngLatAlt;
 import org.geotools.feature.SchemaException;
-import org.geotools.geometry.GeneralDirectPosition;
+import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
-import org.opengis.geometry.DirectPosition;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
@@ -24,6 +23,10 @@ import org.opengis.referencing.operation.TransformException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
 
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
@@ -49,7 +52,7 @@ import de.illilli.opendata.service.wahlgebiet.wahllokal.WahllokalCSVReader;
  */
 public class GeoJsonWahllokalFacade implements Facade {
 
-	CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:32632");
+	CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:3857");
 	CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:4326");
 
 	List<Feature> featureList = new ArrayList<>();
@@ -64,20 +67,18 @@ public class GeoJsonWahllokalFacade implements Facade {
 
 		for (WahllokalCSV csv : wahllokalList) {
 
-			MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, true);
-			double lon = Double.parseDouble(csv.koory);
-			double lat = Double.parseDouble(csv.koorx);
-			DirectPosition ptScr = new GeneralDirectPosition(lon, lat);
-			DirectPosition ptDst = new GeneralDirectPosition(targetCRS);
-			transform.transform(ptScr, ptDst);
+			GeometryFactory gf = new GeometryFactory();
+			Coordinate coord = new Coordinate(Double.parseDouble(csv.koorx), Double.parseDouble(csv.koory));
+			Point sourceGeometry = gf.createPoint(coord);
 
-			double[] punt = ptDst.getCoordinate();
+			MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, false);
+			Geometry targetGeometry = JTS.transform(sourceGeometry, transform);
 
 			Feature feature = new Feature();
 			feature.setId(csv.nr_stimmbezirk800);
 			org.geojson.Point point = new org.geojson.Point();
-			double longitude = punt[0];
-			double latitude = punt[1];
+			double longitude = targetGeometry.getCoordinate().y;
+			double latitude = targetGeometry.getCoordinate().x;
 
 			LngLatAlt geometry = new LngLatAlt(longitude, latitude);
 			point.setCoordinates(geometry);

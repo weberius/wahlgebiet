@@ -1,12 +1,13 @@
 package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 
+import org.apache.commons.io.IOUtils;
 import org.geotools.feature.SchemaException;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.FactoryException;
@@ -22,11 +23,11 @@ public class GeoJsonWahllokalFacadeTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGeoJsonWahllokalFacade() throws URISyntaxException, IOException, SchemaException,
 			NoSuchAuthorityCodeException, FactoryException, MismatchedDimensionException, TransformException {
 		Facade facade = new GeoJsonWahllokalFacade();
-		String expected = "";
+		InputStream inputStream = this.getClass().getResourceAsStream("/wahllokale.json");
+		String expected = IOUtils.toString(inputStream);
 		String actual = facade.getJson();
 		Assert.assertEquals(expected, actual);
 	}

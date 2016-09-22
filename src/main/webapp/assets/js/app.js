@@ -3,34 +3,39 @@ var stamen = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z
 });
 
 var map = L.map("map", {
-	zoom : 13,
+	zoom : 4,
 	center : [ 50.94135, 6.95819 ],
 	layers : [ stamen ],
 	zoomControl : true,
 	attributionControl : true
 });
 
-function onEachFeature(feature, layer) {
-	var text = ""
-		+ "Stimmbezirk: " + feature.properties.NUMMER + "</br>"
-		+ "Kommunalwahlbezirk: " + feature.properties.K_WAHL + "</br>"
-		+ "Landtagswahlkreis: " + feature.properties.L_Wahl + "</br>"
-		+ "Bundestagswahlkreis: " + feature.properties.B_Wahl + "</br>"
-		+ "Stadtbezirk: " + feature.properties.STB + " [" + feature.properties.NR_STB + "]</br>"
-		+ "Stadtteil: " + feature.properties.STT + " [" + feature.properties.NR_STT + "]</br>";
-	layer.bindPopup(text);
-}
-
 var stimmbezirkeLayer = L.geoJson(null, {
-	onEachFeature: onEachFeature
+	onEachFeature: function(feature, layer) {
+		var text = ""
+			+ "Stimmbezirk: " + feature.properties.NUMMER + "</br>"
+			+ "Kommunalwahlbezirk: " + feature.properties.K_WAHL + "</br>"
+			+ "Landtagswahlkreis: " + feature.properties.L_Wahl + "</br>"
+			+ "Bundestagswahlkreis: " + feature.properties.B_Wahl + "</br>"
+			+ "Stadtbezirk: " + feature.properties.STB + " [" + feature.properties.NR_STB + "]</br>"
+			+ "Stadtteil: " + feature.properties.STT + " [" + feature.properties.NR_STT + "]</br>";
+		layer.bindPopup(text);
+	}
 });
 
 $.getJSON("/wahlgebiet/service/stimmbezirke?geojson", function(data) {
 	stimmbezirkeLayer.addData(data);
 	map.addLayer(stimmbezirkeLayer);
-	map.fitBounds(stimmbezirkeLayer.getBounds());
+//	map.fitBounds(stimmbezirkeLayer.getBounds());
 	
 });
 
+var wahllokalLayer = L.geoJson(null);
+		
+$.getJSON("/wahlgebiet/service/wahllokale?geojson", function(data) {
+	wahllokalLayer.addData(data);
+	map.addLayer(wahllokalLayer);
+//	map.fitBounds(wahllokalLayer.getBounds());
+});
 
 
