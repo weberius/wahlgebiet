@@ -26,7 +26,7 @@ var stimmbezirkeLayer = L.geoJson(null, {
 $.getJSON("/wahlgebiet/service/stimmbezirke?geojson", function(data) {
 	stimmbezirkeLayer.addData(data);
 	map.addLayer(stimmbezirkeLayer);
-//	map.fitBounds(stimmbezirkeLayer.getBounds());
+	map.fitBounds(stimmbezirkeLayer.getBounds());
 	
 });
 
