@@ -1,4 +1,4 @@
-package stimmbezirk;
+package de.illilli.opendata.service.wahlgebiet.stimmbezirk;
 
 import java.io.IOException;
 import java.io.StringWriter;

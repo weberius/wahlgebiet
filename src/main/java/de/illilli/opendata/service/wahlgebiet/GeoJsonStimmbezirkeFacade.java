@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
-import stimmbezirk.GeoToolsGeoJsonTransformer;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.GeoToolsGeoJsonTransformer;
 
 public class GeoJsonStimmbezirkeFacade implements Facade {
 
