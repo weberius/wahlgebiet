@@ -21,8 +21,8 @@ public class WahllokalCSVReader {
 		while (csvReader.readRecord()) {
 			WahllokalCSV wahllokal = new WahllokalCSV();
 			wahllokal.objectid = csvReader.get("OBJECTID");
-			wahllokal.nr_stimmbezirk800 = csvReader.get("WLK_NAME");
-			wahllokal.wlk_name = csvReader.get("NR_STIMMBEZIRK800");
+			wahllokal.nr_stimmbezirk800 = csvReader.get("NR_STIMMBEZIRK800");
+			wahllokal.wlk_name = csvReader.get("WLK_NAME");
 			wahllokal.wlk_adresse = csvReader.get("WLK_ADRESSE");
 			wahllokal.rollstuhlgerecht = csvReader.get("ROLLSTUHLGERECHT");
 			wahllokal.wlk_bemerkung = csvReader.get("WLK_BEMERKUNG");
