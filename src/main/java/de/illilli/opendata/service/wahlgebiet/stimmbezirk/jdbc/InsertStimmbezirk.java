@@ -12,11 +12,28 @@ import org.apache.commons.io.IOUtils;
 
 import de.illilli.jdbc.ConnectionFactory;
 
+/**
+ * Insertiert einen Stimmbezirk in die Tabelle STIMMBEZIRK. Erwartet, dass das
+ * SQL in der Datei '/src/main/resources/insertStimmbezirkRecord.sql' definiert
+ * ist.
+ */
 public class InsertStimmbezirk {
 
 	private int inserts;
 	private Connection conn;
 
+	/**
+	 * Erwartet neben der Stimmbezirk-Information eine Connection. Kann z.B. zu
+	 * Testzwecken verwendet werden, wenn die testeshalber eingefügten Daten
+	 * zurückgerollt werden sollen.
+	 * 
+	 * @param dto
+	 *            ein Stimmbezirk
+	 * @param conn
+	 *            die sql-Connection
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public InsertStimmbezirk(StimmbezirkDTO dto, Connection conn) throws IOException, SQLException {
 
 		this.conn = conn;
@@ -28,6 +45,17 @@ public class InsertStimmbezirk {
 				dto.getGeom());
 	}
 
+	/**
+	 * Erwartet eine Stimmbezirk-Information. Die Connection wird über die
+	 * ConnectionFactory bestimmt.
+	 * 
+	 * @param dto
+	 *            ein Stimmbezirk
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @see ConnectionFactory
+	 */
 	public InsertStimmbezirk(StimmbezirkDTO dto) throws IOException, SQLException, NamingException {
 
 		this(dto, ConnectionFactory.getConnection());

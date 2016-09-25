@@ -14,21 +14,35 @@ import javax.sql.DataSource;
  * Datenbank definiert wurde.
  * </p>
  * <p>
- * Beispiel
+ * Beispiel:
  * </p>
  * 
+ * context.xml
+ * 
  * <pre>
- * &lt;Resource 
- * 	name="jdbc/wahlgebiet" 
- * 	auth="Container" 
- * 	type="javax.sql.DataSource"
- * 	username="username" 
- * 	password="password" 
- * 	driverClassName="org.postgresql.Driver"
- * 	url="jdbc:postgresql://server:5432/dbname" 
- * 	maxTotal="25" 
- * 	maxIdle="10"
- * 	validationQuery="select 1" /&gt;
+    &lt;Context&gt;
+        &lt;ResourceLink 
+             name="jdbc/wahlgebiet" 
+             global="jdbc/wahlgebiet"
+             type="javax.sql.DataSource" /&gt;
+    &lt;/Context&gt;
+ * </pre>
+ * 
+ * server.xml
+ * 
+ * <pre>
+    &lt;GlobalNamingResources&gt;
+        &lt;Resource 
+            name="jdbc/wahlgebiet"
+            auth="Container"
+            driverClassName="org.postgresql.Driver"
+            maxTotal="25" 
+            maxIdle="10"
+            username="username"
+            password="password"
+            type="javax.sql.DataSource"
+            url="jdbc:postgresql://localhost:5432/wahlgebiet"
+            validationQuery="select 1"/&gt;
  * </pre>
  * 
  */
