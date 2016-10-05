@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.illilli.jdbc.ConnectionEnvironment;
 import de.illilli.opendata.service.Facade;
 
 public class LoadStimmbezirkFacadeTest {
@@ -23,7 +24,9 @@ public class LoadStimmbezirkFacadeTest {
 
 	@Test
 	public void test() throws IOException, SQLException, NamingException {
+		ConnectionEnvironment.setUpConnectionForJndi();
 		Facade facade = new LoadStimmbezirkFacade(url);
+		System.out.println(facade.getJson());
 	}
 
 }

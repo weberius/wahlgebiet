@@ -11,21 +11,23 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.io.IOUtils;
 
 import de.illilli.jdbc.ConnectionFactory;
+import de.illilli.jdbc.UpdateData;
 
 /**
  * Insertiert einen Stimmbezirk in die Tabelle STIMMBEZIRK. Erwartet, dass das
  * SQL in der Datei '/src/main/resources/insertStimmbezirkRecord.sql' definiert
  * ist.
  */
-public class InsertStimmbezirk {
+public class InsertStimmbezirk implements UpdateData {
 
-	private int inserts;
+	private int rowsUpdated;
 	private Connection conn;
 
 	/**
 	 * Erwartet neben der Stimmbezirk-Information eine Connection. Kann z.B. zu
 	 * Testzwecken verwendet werden, wenn die testeshalber eingefügten Daten
-	 * zurückgerollt werden sollen.
+	 * zurückgerollt werden sollen. Connection muss nach der Abfrage geschlossen
+	 * werden.
 	 * 
 	 * @param dto
 	 *            ein Stimmbezirk
@@ -34,20 +36,21 @@ public class InsertStimmbezirk {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	public InsertStimmbezirk(StimmbezirkDTO dto, Connection conn) throws IOException, SQLException {
+	InsertStimmbezirk(StimmbezirkDTO dto, Connection conn) throws IOException, SQLException {
 
 		this.conn = conn;
 		InputStream inputStream = this.getClass().getResourceAsStream("/insertStimmbezirkRecord.sql");
 		String sql = IOUtils.toString(inputStream);
 		QueryRunner run = new QueryRunner();
-		inserts = run.update(conn, sql, dto.getId(), dto.getNummer(), dto.getkWahl(), dto.getlWahl(), dto.getbWahl(),
-				dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(), dto.getShapeLen(),
-				dto.getGeom());
+		rowsUpdated = run.update(conn, sql, dto.getId(), dto.getNummer(), dto.getkWahl(), dto.getlWahl(),
+				dto.getbWahl(), dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(),
+				dto.getShapeLen(), dto.getGeom());
 	}
 
 	/**
 	 * Erwartet eine Stimmbezirk-Information. Die Connection wird über die
-	 * ConnectionFactory bestimmt.
+	 * ConnectionFactory bestimmt. Die Connection wird nach der Abfrage wieder
+	 * zurückgegeben.
 	 * 
 	 * @param dto
 	 *            ein Stimmbezirk
@@ -59,25 +62,17 @@ public class InsertStimmbezirk {
 	public InsertStimmbezirk(StimmbezirkDTO dto) throws IOException, SQLException, NamingException {
 
 		this(dto, ConnectionFactory.getConnection());
+		closeConnection();
 	}
 
-	/**
-	 * Get Number of inserts in Database.
-	 * 
-	 * @return number of inserts.
-	 */
-	public int getInserts() {
+	@Override
+	public int getRowsUpdated() {
 
-		return inserts;
+		return rowsUpdated;
 	}
 
-	/**
-	 * Please don't forget to return the connection.
-	 * 
-	 * @throws SQLException
-	 */
+	@Override
 	public void closeConnection() throws SQLException {
-
 		conn.close();
 	}
 }
