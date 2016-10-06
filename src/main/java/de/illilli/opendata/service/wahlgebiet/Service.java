@@ -3,10 +3,13 @@ package de.illilli.opendata.service.wahlgebiet;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -19,7 +22,9 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.operation.TransformException;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
@@ -68,6 +73,32 @@ public class Service {
 
 		URL url = GeoJsonWahllokalFacade.class.getResource("/stimmbezirk/Stimmbezirk.shp");
 		return new GeoJsonStimmbezirkeFacade(url).getJson();
+	}
+
+	/**
+	 * <p>
+	 * Dieser Service holt die Daten von nextbike-live und schreibt die
+	 * aktuellen Positionen der Fahrräder in die Datenbank.
+	 * </p>
+	 * <p>
+	 * Beispiel:
+	 * <code>curl -X PUT http://localhost:8080/wahlgebiet/service/stimmbezirke/put</code>
+	 * </p>
+	 * 
+	 * @return
+	 * @throws JsonParseException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	@PUT
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/stimmbezirke/put")
+	public String putStimmbezirke()
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+		Facade facade = new LoadStimmbezirkFacade();
+		return facade.getJson();
 	}
 
 	/**

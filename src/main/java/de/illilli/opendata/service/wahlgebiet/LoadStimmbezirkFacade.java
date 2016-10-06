@@ -1,6 +1,7 @@
 package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -32,7 +33,31 @@ public class LoadStimmbezirkFacade implements Facade {
 	private Map<String, Object> params;
 	SimpleFeatureSource featureSource;
 	private static DataStore dataStore;
+	private int dataInserted = 0;
+	private int dataNotInserted = 0;
 
+	/**
+	 * Dieser Konstruktor setzt den Ort für die Stimmbezirk Shape Dateien
+	 * 
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	public LoadStimmbezirkFacade() throws MalformedURLException, IOException, SQLException, NamingException {
+		this(GeoJsonWahllokalFacade.class.getResource("/stimmbezirk/Stimmbezirk.shp"));
+	}
+
+	/**
+	 * Anhand der Shape Daten werden die Stimmbezirke in die Datenbank
+	 * eingeladen.
+	 * 
+	 * @param url
+	 *            Wo die einzulesenden Daten zu finden sind.
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	public LoadStimmbezirkFacade(URL url) throws IOException, SQLException, NamingException {
 
 		setFeatureSource(url);
@@ -48,7 +73,9 @@ public class LoadStimmbezirkFacade implements Facade {
 			StimmbezirkDTO dto = new SimpleFeatureStimmbezirk2DTO(feature).getDto();
 			try {
 				UpdateData insert = new InsertStimmbezirk(dto);
+				dataInserted = dataInserted + insert.getRowsUpdated();
 			} catch (SQLException e) {
+				dataNotInserted++;
 				logger.error("Unable to load data for " + dto.toString() + "; " + e.toString());
 			}
 		}
@@ -69,8 +96,14 @@ public class LoadStimmbezirkFacade implements Facade {
 
 	@Override
 	public String getJson() throws JsonProcessingException {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuffer sb = new StringBuffer();
+		sb.append("{\"dataInserted\": ");
+		sb.append(dataInserted);
+		sb.append(",");
+		sb.append("\"dataNotInserted\":");
+		sb.append(dataNotInserted);
+		sb.append("}");
+		return sb.toString();
 	}
 
 }
