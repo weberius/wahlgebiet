@@ -48,7 +48,8 @@ public class Service {
 	}
 
 	/**
-	 * Example:
+	 * Get information about stimmbezirke. At the moment it returns an geojson.
+	 * If Example:
 	 * <p>
 	 * <a href="http://localhost:8080/wahlgebiet/service/stimmbezirke?geojson">
 	 * /wahlgebiet/service/stimmbezirke?geojson</a>
@@ -70,9 +71,14 @@ public class Service {
 
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
+		boolean isGeojson = request.getParameter("geojson") != null;
 
-		URL url = GeoJsonWahllokalFacade.class.getResource("/stimmbezirk/Stimmbezirk.shp");
-		return new GeoJsonStimmbezirkeFacade(url).getJson();
+		if (isGeojson) {
+			URL url = GeoJsonWahllokalFacade.class.getResource("/stimmbezirk/Stimmbezirk.shp");
+			return new GeoJsonStimmbezirkeFacade(url).getJson();
+		} else {
+			return "not implemented; use /wahlgebiet/service/stimmbezirke?geojson";
+		}
 	}
 
 	/**
