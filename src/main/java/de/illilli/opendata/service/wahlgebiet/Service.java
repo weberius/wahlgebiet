@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -55,7 +56,7 @@ public class Service {
 	 * /wahlgebiet/service/stimmbezirke?geojson</a>
 	 * </p>
 	 * 
-	 * @return
+	 * @return all stimmbezirke geojson formatted
 	 * @throws MismatchedDimensionException
 	 * @throws JsonProcessingException
 	 * @throws NoSuchAuthorityCodeException
@@ -69,6 +70,7 @@ public class Service {
 	public String getStimmbezirke() throws MismatchedDimensionException, JsonProcessingException,
 			NoSuchAuthorityCodeException, IOException, FactoryException, TransformException {
 
+		logger.info("/stimmbezirke called");
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 		boolean isGeojson = request.getParameter("geojson") != null;
@@ -77,8 +79,34 @@ public class Service {
 			URL url = GeoJsonWahllokalFacade.class.getResource("/stimmbezirk/Stimmbezirk.shp");
 			return new GeoJsonStimmbezirkeFacade(url).getJson();
 		} else {
-			return "not implemented; use /wahlgebiet/service/stimmbezirke?geojson";
+			return "not implemented; use '/wahlgebiet/service/stimmbezirke?geojson' instead";
 		}
+	}
+
+	/**
+	 * Get the stimmbezirk by lat-lng geo Information.
+	 * 
+	 * @return the stimmbezirk information json formatted.
+	 * @throws MismatchedDimensionException
+	 * @throws JsonProcessingException
+	 * @throws NoSuchAuthorityCodeException
+	 * @throws IOException
+	 * @throws FactoryException
+	 * @throws TransformException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/stimmbezirk/{lat}/{lng}")
+	public String getStimmbezirkByLatLng(@PathParam("lat") double lat, @PathParam("lng") double lng)
+			throws MismatchedDimensionException, JsonProcessingException, NoSuchAuthorityCodeException, IOException,
+			FactoryException, TransformException {
+
+		logger.info("/stimmbezirk/{" + lat + "}/{" + lng + "} called");
+
+		request.setCharacterEncoding(Config.getProperty("encoding"));
+		response.setCharacterEncoding(Config.getProperty("encoding"));
+
+		return new StimmbezirkFacade(lat, lng).getJson();
 	}
 
 	/**
@@ -103,6 +131,9 @@ public class Service {
 	@Path("/stimmbezirke/put")
 	public String putStimmbezirke()
 			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+
+		logger.info("/stimmbezirke/put called");
+
 		Facade facade = new LoadStimmbezirkFacade();
 		return facade.getJson();
 	}
@@ -130,11 +161,17 @@ public class Service {
 	public String getWahllokale() throws URISyntaxException, IOException, SchemaException, NoSuchAuthorityCodeException,
 			FactoryException, MismatchedDimensionException, TransformException {
 
+		logger.info("/wahllokale called");
+
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 
-		Facade facade = new GeoJsonWahllokalFacade();
-		return facade.getJson();
+		boolean isGeojson = request.getParameter("geojson") != null;
+		if (isGeojson) {
+			return new GeoJsonWahllokalFacade().getJson();
+		} else {
+			return "not implemented; use '/wahlgebiet/service/wahllokale?geojson' instead";
+		}
 	}
 
 }
