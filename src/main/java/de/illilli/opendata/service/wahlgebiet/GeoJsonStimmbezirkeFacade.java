@@ -29,8 +29,8 @@ public class GeoJsonStimmbezirkeFacade implements Facade {
 	SimpleFeatureSource featureSource;
 	private static DataStore dataStore;
 
-	public GeoJsonStimmbezirkeFacade(URL url) throws MismatchedDimensionException, NoSuchAuthorityCodeException, IOException,
-			FactoryException, TransformException {
+	public GeoJsonStimmbezirkeFacade(URL url) throws MismatchedDimensionException, NoSuchAuthorityCodeException,
+			IOException, FactoryException, TransformException {
 		setFeatureSource(url);
 	}
 
@@ -40,12 +40,14 @@ public class GeoJsonStimmbezirkeFacade implements Facade {
 			params.put("url", url);
 			params.put("create spatial index", false);
 			params.put("memory mapped buffer", false);
-			params.put("charset", Config.getProperty("encoding"));
+			params.put("charset", Config.getProperty("shp.encoding"));
+
 			dataStore = DataStoreFinder.getDataStore(params);
 		}
 		featureSource = dataStore.getFeatureSource(dataStore.getTypeNames()[0]);
 	}
 
+	@Override
 	public String getJson() throws JsonProcessingException {
 
 		String json = "";
