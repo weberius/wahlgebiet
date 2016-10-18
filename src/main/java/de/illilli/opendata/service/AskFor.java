@@ -1,5 +1,6 @@
 package de.illilli.opendata.service;
 
-public class AskFor {
+public interface AskFor<T> {
 
+	public T getData();
 }
