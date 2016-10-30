@@ -42,9 +42,10 @@ public class InsertStimmbezirk implements UpdateData {
 		InputStream inputStream = this.getClass().getResourceAsStream("/insertStimmbezirkRecord.sql");
 		String sql = IOUtils.toString(inputStream);
 		QueryRunner run = new QueryRunner();
-		rowsUpdated = run.update(conn, sql, dto.getId(), dto.getNummer(), dto.getkWahl(), dto.getlWahl(),
-				dto.getbWahl(), dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(),
-				dto.getShapeLen(), dto.getGeom());
+		Object[] params = new Object[] { dto.getId(), dto.getNummer(), dto.getkWahl(), dto.getlWahl(), dto.getbWahl(),
+				dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(), dto.getShapeLen(),
+				dto.getGeom() };
+		rowsUpdated = run.update(conn, sql, params);
 	}
 
 	/**
