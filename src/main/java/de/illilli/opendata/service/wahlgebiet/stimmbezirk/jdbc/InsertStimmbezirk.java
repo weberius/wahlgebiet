@@ -10,7 +10,6 @@ import javax.naming.NamingException;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.postgresql.PGConnection;
 
 import de.illilli.jdbc.ConnectionFactory;
 import de.illilli.jdbc.UpdateData;
@@ -43,8 +42,9 @@ public class InsertStimmbezirk implements UpdateData {
 	InsertStimmbezirk(StimmbezirkDTO dto, Connection conn) throws IOException, SQLException, ClassNotFoundException {
 
 		this.conn = conn;
-		PGConnection pgCon = conn.unwrap(PGConnection.class);
-		pgCon.addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
+		// PGConnection pgCon = conn.unwrap(PGConnection.class);
+		// pgCon.addDataType("geometry",
+		// Class.forName("org.postgis.PGgeometry"));
 
 		InputStream inputStream = this.getClass().getResourceAsStream("/insertStimmbezirkRecord.sql");
 		String sql = IOUtils.toString(inputStream);
