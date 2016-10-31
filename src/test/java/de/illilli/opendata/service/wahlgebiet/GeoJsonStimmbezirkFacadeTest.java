@@ -8,12 +8,15 @@ import java.net.URL;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.operation.TransformException;
 
+@Ignore
+@Deprecated
 public class GeoJsonStimmbezirkFacadeTest {
 
 	private URL url;
