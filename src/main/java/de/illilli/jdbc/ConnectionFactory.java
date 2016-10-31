@@ -57,11 +57,7 @@ public class ConnectionFactory {
 		Context envContext = (Context) initContext.lookup("java:/comp/env");
 		DataSource ds = (DataSource) envContext.lookup("jdbc/wahlgebiet");
 		Connection conn = ds.getConnection();
-		try {
-			((org.postgresql.PGConnection) conn).addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
-		} catch (ClassNotFoundException e) {
-			logger.error("unable to addDataType('geometry'): " + e.toString());
-		}
+		logger.info("got connection for '" + conn.toString() + "'");
 		return conn;
 	}
 }
