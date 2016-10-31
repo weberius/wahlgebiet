@@ -41,6 +41,10 @@ Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson 
 ## Datenbank wahlergebnis anlegen
 
     sudo -u postgres createdb -O wahlgebiet wahlgebiet
+    
+## Postgis topology
+
+    sudo -u postgres psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" wahlgebiet
 
 ## Tabellen anlegen
 
