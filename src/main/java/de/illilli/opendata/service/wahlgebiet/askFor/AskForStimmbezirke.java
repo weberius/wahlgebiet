@@ -30,7 +30,7 @@ public class AskForStimmbezirke implements AskFor<StimmbezirkeArcgis> {
 
 		ObjectMapper mapper = new ObjectMapper();
 		data = mapper.readValue(inputStream, StimmbezirkeArcgis.class);
-		logger.debug(data.toString());
+		logger.debug(URL);
 
 	}
 
