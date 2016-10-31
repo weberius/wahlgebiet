@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import org.apache.commons.io.IOUtils;
+import org.geojson.GeoJsonObject;
 import org.junit.After;
 import org.junit.Before;
 import org.postgis.LinearRing;
@@ -13,6 +15,10 @@ import org.postgis.MultiPolygon;
 import org.postgis.PGgeometry;
 import org.postgis.Point;
 import org.postgis.Polygon;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.illilli.jdbc.ConnectionEnvironment;
 import de.illilli.jdbc.ConnectionFactory;
@@ -46,7 +52,7 @@ public class InsertStimmbezirkTest {
 		insert.closeConnection();
 	}
 
-	public static StimmbezirkDTO getStimmbezirkForTest() {
+	public static StimmbezirkDTO getStimmbezirkForTest() throws JsonParseException, JsonMappingException, IOException {
 		StimmbezirkDTO s = new StimmbezirkDTO();
 		s.setbWahl(123);
 		s.setId("id");
@@ -59,7 +65,8 @@ public class InsertStimmbezirkTest {
 		s.setShapeLen(123456789.0123);
 		s.setStb("stadtbezirk");
 		s.setStt("stadtteil");
-		s.setGeom(InsertStimmbezirkTest.getMultipolygon());
+		// s.setGeom(InsertStimmbezirkTest.getMultipolygon());
+		s.setGeom(InsertStimmbezirkTest.getMultipolygonFromGeoJson());
 		return s;
 	}
 
@@ -80,6 +87,20 @@ public class InsertStimmbezirkTest {
 		geom.setSrid(4326);
 
 		return new PGgeometry(geom);
+	}
+
+	public static PGgeometry getMultipolygonFromGeoJson() throws JsonParseException, JsonMappingException, IOException {
+		GeoJsonObject object = new ObjectMapper().readValue(IOUtils.toInputStream(getMultipolygonAsGeojson()),
+				GeoJsonObject.class);
+		MultiPolygon geom = new GeoJson2PostgisMultipolygon(object).getGeometry();
+		return new PGgeometry(geom);
+	}
+
+	public static String getMultipolygonAsGeojson() {
+		StringBuffer geojson = new StringBuffer();
+		geojson.append(
+				"{\"type\": \"MultiPolygon\", \"coordinates\": [ [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] ] }, \"crs\" : {\"type\":\"name\",\"properties\":{\"name\":\"EPSG:4326\"}}");
+		return geojson.toString();
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 
 import de.illilli.jdbc.ConnectionFactory;
 import de.illilli.jdbc.UpdateData;
@@ -20,6 +21,7 @@ import de.illilli.jdbc.UpdateData;
  */
 public class InsertStimmbezirk implements UpdateData {
 
+	private static final Logger logger = Logger.getLogger(InsertStimmbezirk.class);
 	private int rowsUpdated;
 	private Connection conn;
 
@@ -46,6 +48,7 @@ public class InsertStimmbezirk implements UpdateData {
 				dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(), dto.getShapeLen(),
 				dto.getGeom() };
 		rowsUpdated = run.update(conn, sql, params);
+		logger.info("insert " + dto.toString());
 	}
 
 	/**

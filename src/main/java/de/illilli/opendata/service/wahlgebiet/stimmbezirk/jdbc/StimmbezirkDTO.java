@@ -49,7 +49,7 @@ public class StimmbezirkDTO {
 	 */
 	private double shapeLen;
 	/**
-	 * Die MultiPolygon-Geometrie
+	 * Die MultiPolygon-Geometrie als geojson Struktur
 	 */
 	private PGgeometry geom;
 
@@ -154,6 +154,7 @@ public class StimmbezirkDTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + bWahl;
+		result = prime * result + ((geom == null) ? 0 : geom.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + kWahl;
 		result = prime * result + lWahl;
@@ -180,6 +181,11 @@ public class StimmbezirkDTO {
 			return false;
 		StimmbezirkDTO other = (StimmbezirkDTO) obj;
 		if (bWahl != other.bWahl)
+			return false;
+		if (geom == null) {
+			if (other.geom != null)
+				return false;
+		} else if (!geom.equals(other.geom))
 			return false;
 		if (id == null) {
 			if (other.id != null)

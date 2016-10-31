@@ -1,30 +1,28 @@
 package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
+import org.geojson.FeatureCollection;
 import org.geotools.data.DataStore;
-import org.geotools.data.DataStoreFinder;
-import org.geotools.data.simple.SimpleFeatureCollection;
-import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
-import org.opengis.feature.simple.SimpleFeature;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.illilli.jdbc.UpdateData;
-import de.illilli.opendata.service.Config;
+import de.illilli.opendata.koeln.arcgis.Feature;
+import de.illilli.opendata.koeln.arcgis.StimmbezirkeArcgis;
+import de.illilli.opendata.service.AskFor;
 import de.illilli.opendata.service.Facade;
+import de.illilli.opendata.service.wahlgebiet.askFor.AskForStimmbezirke;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.DeleteStimmbezirk;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.GeojsonFeatureStimmbezirk2DTO;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.InsertStimmbezirk;
-import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.SimpleFeatureStimmbezirk2DTO;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.StimmbezirkDTO;
 
 public class LoadStimmbezirkFacade implements Facade {
@@ -37,18 +35,6 @@ public class LoadStimmbezirkFacade implements Facade {
 	private int dataNotInserted = 0;
 
 	/**
-	 * Dieser Konstruktor setzt den Ort für die Stimmbezirk Shape Dateien
-	 * 
-	 * @throws MalformedURLException
-	 * @throws IOException
-	 * @throws SQLException
-	 * @throws NamingException
-	 */
-	public LoadStimmbezirkFacade() throws MalformedURLException, IOException, SQLException, NamingException {
-		this(GeoJsonWahllokalFacade.class.getResource("/stimmbezirk/Stimmbezirk.shp"));
-	}
-
-	/**
 	 * Anhand der Shape Daten werden die Stimmbezirke in die Datenbank
 	 * eingeladen.
 	 * 
@@ -58,19 +44,24 @@ public class LoadStimmbezirkFacade implements Facade {
 	 * @throws SQLException
 	 * @throws NamingException
 	 */
-	public LoadStimmbezirkFacade(URL url) throws IOException, SQLException, NamingException {
+	public LoadStimmbezirkFacade() throws IOException, SQLException, NamingException {
 
-		setFeatureSource(url);
+		FeatureCollection featureCollection = new FeatureCollection();
 
-		SimpleFeatureCollection collection = featureSource.getFeatures();
+		AskFor<StimmbezirkeArcgis> askFor = new AskForStimmbezirke();
+		StimmbezirkeArcgis stimmbezirkeFromArcgis = askFor.getData();
+		List<Feature> featureList = stimmbezirkeFromArcgis.getFeatures();
 
-		SimpleFeatureIterator iterator = collection.features();
+		featureCollection = new ArcgisFeatureList2GeojsonFeatureCollection(featureList).getFeatureCollection();
+
+		// delete stimmbezirke from database
 		UpdateData delete = new DeleteStimmbezirk();
 		logger.info(delete.getRowsUpdated() + "rows deleted");
-		while (iterator.hasNext()) {
-			SimpleFeature feature = iterator.next();
 
-			StimmbezirkDTO dto = new SimpleFeatureStimmbezirk2DTO(feature).getDto();
+		for (org.geojson.Feature geojsonFeature : featureCollection.getFeatures()) {
+
+			StimmbezirkDTO dto = new GeojsonFeatureStimmbezirk2DTO(geojsonFeature).getDto();
+
 			try {
 				UpdateData insert = new InsertStimmbezirk(dto);
 				dataInserted = dataInserted + insert.getRowsUpdated();
@@ -78,20 +69,9 @@ public class LoadStimmbezirkFacade implements Facade {
 				dataNotInserted++;
 				logger.error("Unable to load data for " + dto.toString() + "; " + e.toString());
 			}
+
 		}
 
-	}
-
-	void setFeatureSource(URL url) throws IOException {
-		if (dataStore == null) {
-			params = new HashMap<String, Object>();
-			params.put("url", url);
-			params.put("create spatial index", false);
-			params.put("memory mapped buffer", false);
-			params.put("charset", Config.getProperty("shp.encoding"));
-			dataStore = DataStoreFinder.getDataStore(params);
-		}
-		featureSource = dataStore.getFeatureSource(dataStore.getTypeNames()[0]);
 	}
 
 	@Override
