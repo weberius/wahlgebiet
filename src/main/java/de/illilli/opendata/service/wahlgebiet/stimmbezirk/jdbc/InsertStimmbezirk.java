@@ -65,6 +65,7 @@ public class InsertStimmbezirk implements UpdateData {
 		psSE.setObject(12, dto.getGeom());
 
 		psSE.execute();
+		rowsUpdated = psSE.getUpdateCount();
 		psSE.close();
 
 		// QueryRunner run = new QueryRunner();
@@ -74,7 +75,8 @@ public class InsertStimmbezirk implements UpdateData {
 		// dto.getShapeArea(), dto.getShapeLen(),
 		// dto.getGeom() };
 		// rowsUpdated = run.update(conn, sql, params);
-		// logger.info("insert " + dto.toString());
+
+		logger.info("insert " + dto.toString());
 	}
 
 	/**
