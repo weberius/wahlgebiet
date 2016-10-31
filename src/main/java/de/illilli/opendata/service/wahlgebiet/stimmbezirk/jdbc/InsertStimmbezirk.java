@@ -3,11 +3,11 @@ package de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
-import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
@@ -48,12 +48,33 @@ public class InsertStimmbezirk implements UpdateData {
 
 		InputStream inputStream = this.getClass().getResourceAsStream("/insertStimmbezirkRecord.sql");
 		String sql = IOUtils.toString(inputStream);
-		QueryRunner run = new QueryRunner();
-		Object[] params = new Object[] { dto.getId(), dto.getNummer(), dto.getkWahl(), dto.getlWahl(), dto.getbWahl(),
-				dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(), dto.getShapeLen(),
-				dto.getGeom() };
-		rowsUpdated = run.update(conn, sql, params);
-		logger.info("insert " + dto.toString());
+
+		PreparedStatement psSE = this.conn.prepareStatement(sql);
+
+		psSE.setString(1, dto.getId());
+		psSE.setInt(2, dto.getNummer());
+		psSE.setInt(3, dto.getkWahl());
+		psSE.setInt(4, dto.getlWahl());
+		psSE.setInt(5, dto.getbWahl());
+		psSE.setInt(6, dto.getNrStb());
+		psSE.setString(7, dto.getStb());
+		psSE.setInt(8, dto.getNrStt());
+		psSE.setString(9, dto.getStt());
+		psSE.setDouble(10, dto.getShapeArea());
+		psSE.setDouble(11, dto.getShapeLen());
+		psSE.setObject(12, dto.getGeom());
+
+		psSE.execute();
+		psSE.close();
+
+		// QueryRunner run = new QueryRunner();
+		// Object[] params = new Object[] { dto.getId(), dto.getNummer(),
+		// dto.getkWahl(), dto.getlWahl(), dto.getbWahl(),
+		// dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(),
+		// dto.getShapeArea(), dto.getShapeLen(),
+		// dto.getGeom() };
+		// rowsUpdated = run.update(conn, sql, params);
+		// logger.info("insert " + dto.toString());
 	}
 
 	/**
