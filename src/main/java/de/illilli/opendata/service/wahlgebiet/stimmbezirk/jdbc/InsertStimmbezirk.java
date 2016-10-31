@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.postgresql.PGConnection;
 
 import de.illilli.jdbc.ConnectionFactory;
 import de.illilli.jdbc.UpdateData;
@@ -37,10 +38,14 @@ public class InsertStimmbezirk implements UpdateData {
 	 *            die sql-Connection
 	 * @throws IOException
 	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	InsertStimmbezirk(StimmbezirkDTO dto, Connection conn) throws IOException, SQLException {
+	InsertStimmbezirk(StimmbezirkDTO dto, Connection conn) throws IOException, SQLException, ClassNotFoundException {
 
 		this.conn = conn;
+		PGConnection pgCon = conn.unwrap(PGConnection.class);
+		pgCon.addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
+
 		InputStream inputStream = this.getClass().getResourceAsStream("/insertStimmbezirkRecord.sql");
 		String sql = IOUtils.toString(inputStream);
 		QueryRunner run = new QueryRunner();
@@ -61,9 +66,11 @@ public class InsertStimmbezirk implements UpdateData {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws ClassNotFoundException
 	 * @see ConnectionFactory
 	 */
-	public InsertStimmbezirk(StimmbezirkDTO dto) throws IOException, SQLException, NamingException {
+	public InsertStimmbezirk(StimmbezirkDTO dto)
+			throws IOException, SQLException, NamingException, ClassNotFoundException {
 
 		this(dto, ConnectionFactory.getConnection());
 		closeConnection();

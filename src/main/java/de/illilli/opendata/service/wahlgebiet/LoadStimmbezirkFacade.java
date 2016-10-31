@@ -68,6 +68,8 @@ public class LoadStimmbezirkFacade implements Facade {
 			} catch (SQLException e) {
 				dataNotInserted++;
 				logger.error("Unable to load data for " + dto.toString() + "; " + e.toString());
+			} catch (ClassNotFoundException e) {
+				logger.error(e);
 			}
 
 		}

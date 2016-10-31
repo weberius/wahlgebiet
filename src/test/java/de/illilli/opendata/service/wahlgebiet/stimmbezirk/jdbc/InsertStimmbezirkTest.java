@@ -44,7 +44,7 @@ public class InsertStimmbezirkTest {
 	// fail("Not yet implemented");
 	// }
 
-	public static void main(String[] args) throws SQLException, NamingException, IOException {
+	public static void main(String[] args) throws SQLException, NamingException, IOException, ClassNotFoundException {
 		ConnectionEnvironment.setUpConnectionForJndi();
 		Connection conn = ConnectionFactory.getConnection();
 		StimmbezirkDTO stimmbezirk = InsertStimmbezirkTest.getStimmbezirkForTest();
