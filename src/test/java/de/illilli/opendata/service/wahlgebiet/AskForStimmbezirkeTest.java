@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -21,6 +22,7 @@ public class AskForStimmbezirkeTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetData() throws JsonParseException, JsonMappingException, IOException {
 
 		AskFor<StimmbezirkeArcgis> askFor = new AskForStimmbezirke(
