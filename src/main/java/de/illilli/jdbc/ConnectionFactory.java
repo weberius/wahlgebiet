@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 /**
  * <p>
  * Die ConnectionFactory unterstellt, dass im Tomcat die Verbindung zur
@@ -48,11 +50,18 @@ import javax.sql.DataSource;
  */
 public class ConnectionFactory {
 
+	private static final Logger logger = Logger.getLogger(ConnectionFactory.class);
+
 	public static Connection getConnection() throws SQLException, NamingException {
 		Context initContext = new InitialContext();
 		Context envContext = (Context) initContext.lookup("java:/comp/env");
 		DataSource ds = (DataSource) envContext.lookup("jdbc/wahlgebiet");
 		Connection conn = ds.getConnection();
+		try {
+			((org.postgresql.PGConnection) conn).addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
+		} catch (ClassNotFoundException e) {
+			logger.error("unable to addDataType('geometry'): " + e.toString());
+		}
 		return conn;
 	}
 }
