@@ -3,13 +3,11 @@ package de.illilli.opendata.service.wahlgebiet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.naming.NamingException;
 
 import org.apache.log4j.Logger;
 import org.geojson.FeatureCollection;
-import org.geotools.data.DataStore;
 import org.geotools.data.simple.SimpleFeatureSource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,9 +26,7 @@ import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.StimmbezirkDTO;
 public class LoadStimmbezirkFacade implements Facade {
 
 	private static final Logger logger = Logger.getLogger(LoadStimmbezirkFacade.class);
-	private Map<String, Object> params;
 	SimpleFeatureSource featureSource;
-	private static DataStore dataStore;
 	private int dataInserted = 0;
 	private int dataNotInserted = 0;
 

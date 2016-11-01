@@ -13,12 +13,12 @@ var map = L.map("map", {
 var stimmbezirkeLayer = L.geoJson(null, {
 	onEachFeature: function(feature, layer) {
 		var text = ""
-			+ "Stimmbezirk: " + feature.properties.NUMMER + "</br>"
-			+ "Kommunalwahlbezirk: " + feature.properties.K_WAHL + "</br>"
-			+ "Landtagswahlkreis: " + feature.properties.L_Wahl + "</br>"
-			+ "Bundestagswahlkreis: " + feature.properties.B_Wahl + "</br>"
-			+ "Stadtbezirk: " + feature.properties.STB + " [" + feature.properties.NR_STB + "]</br>"
-			+ "Stadtteil: " + feature.properties.STT + " [" + feature.properties.NR_STT + "]</br>";
+			+ "Stimmbezirk: " + feature.id + "</br>"
+			+ "Kommunalwahlbezirk: " + feature.properties.kommunalwahlkreis + "</br>"
+			+ "Landtagswahlkreis: " + feature.properties.landtagswahlkreis + "</br>"
+			+ "Bundestagswahlkreis: " + feature.properties.bundestagwahlkreis + "</br>"
+			+ "Stadtbezirk: " + feature.properties.stadtbezirk + " [" + feature.properties.nrstadtbezirk + "]</br>"
+			+ "Stadtteil: " + feature.properties.stadtteil + " [" + feature.properties.nrstadtteil + "]</br>";
 		layer.bindPopup(text);
 	}
 });

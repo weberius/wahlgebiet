@@ -2,7 +2,6 @@ package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -76,8 +75,7 @@ public class Service {
 		boolean isGeojson = request.getParameter("geojson") != null;
 
 		if (isGeojson) {
-			URL url = GeoJsonWahllokalFacade.class.getResource("/stimmbezirk/Stimmbezirk.shp");
-			return new GeoJsonStimmbezirkeFacade(url).getJson();
+			return new GeoJsonStimmbezirkeFacade().getJson();
 		} else {
 			return "not implemented; use '/wahlgebiet/service/stimmbezirke?geojson' instead";
 		}
