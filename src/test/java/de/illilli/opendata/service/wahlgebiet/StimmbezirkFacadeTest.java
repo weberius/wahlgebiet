@@ -1,14 +1,10 @@
 package de.illilli.opendata.service.wahlgebiet;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
-import de.illilli.opendata.service.Facade;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Stimmbezirk;
 
 public class StimmbezirkFacadeTest {
@@ -17,22 +13,8 @@ public class StimmbezirkFacadeTest {
 	public void setUp() throws Exception {
 	}
 
-	/**
-	 * Test for interface; uses a default "Stimmbezirk" and check wether all
-	 * fields are set.
-	 * 
-	 * @throws IOException
-	 */
-	@Test
-	public void testGetJson() throws IOException {
-		Facade facade = new StimmbezirkFacade(getDefaultStimmbezirk());
-		InputStream inputStream = this.getClass().getResourceAsStream("/stimmbezirk.default.json");
-		String expected = IOUtils.toString(inputStream);
-		String actual = facade.getJson();
-		Assert.assertEquals(expected, actual);
-	}
-
-	public static Stimmbezirk getDefaultStimmbezirk() {
+	public static List<Stimmbezirk> getDefaultStimmbezirk() {
+		List<Stimmbezirk> stimmbezirkList = new ArrayList<>();
 		Stimmbezirk stimmbezirk = new Stimmbezirk();
 		stimmbezirk.setFlaeche(0.0);
 		stimmbezirk.setId("id");
@@ -45,7 +27,8 @@ public class StimmbezirkFacadeTest {
 		stimmbezirk.setStadtbezirk("stadtbezirk");
 		stimmbezirk.setStadtteil("stadtteil");
 		stimmbezirk.setUmfang(0.0);
-		return stimmbezirk;
+		stimmbezirkList.add(stimmbezirk);
+		return stimmbezirkList;
 	}
 
 }

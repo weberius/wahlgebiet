@@ -82,7 +82,15 @@ public class Service {
 	}
 
 	/**
+	 * <p>
 	 * Get the stimmbezirk by lat-lng geo Information.
+	 * </p>
+	 * 
+	 * <p>
+	 * Example: <a href=
+	 * "http://localhost:8080/wahlgebiet/service/stimmbezirk/6.958307/50.941357">
+	 * /wahlgebiet/service/stimmbezirk/{lng}/{lat}</a>
+	 * </p>
 	 * 
 	 * @return the stimmbezirk information json formatted.
 	 * @throws MismatchedDimensionException
@@ -91,20 +99,22 @@ public class Service {
 	 * @throws IOException
 	 * @throws FactoryException
 	 * @throws TransformException
+	 * @throws NamingException
+	 * @throws SQLException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/stimmbezirk/{lat}/{lng}")
-	public String getStimmbezirkByLatLng(@PathParam("lat") double lat, @PathParam("lng") double lng)
+	@Path("/stimmbezirk/{lng}/{lat}")
+	public String getStimmbezirkByLatLng(@PathParam("lng") double lng, @PathParam("lat") double lat)
 			throws MismatchedDimensionException, JsonProcessingException, NoSuchAuthorityCodeException, IOException,
-			FactoryException, TransformException {
+			FactoryException, TransformException, SQLException, NamingException {
 
-		logger.info("/stimmbezirk/{" + lat + "}/{" + lng + "} called");
+		logger.info("/stimmbezirk/" + lng + "/" + lat + " called");
 
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 
-		return new StimmbezirkFacade(lat, lng).getJson();
+		return new StimmbezirkFacade(lng, lat).getJson();
 	}
 
 	/**
