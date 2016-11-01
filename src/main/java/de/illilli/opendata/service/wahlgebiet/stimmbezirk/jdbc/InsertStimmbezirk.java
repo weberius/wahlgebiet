@@ -46,25 +46,6 @@ public class InsertStimmbezirk implements UpdateData {
 		InputStream inputStream = this.getClass().getResourceAsStream("/insertStimmbezirkRecord.sql");
 		String sql = IOUtils.toString(inputStream);
 
-		// PreparedStatement psSE = this.conn.prepareStatement(sql);
-
-		// psSE.setString(1, dto.getId());
-		// psSE.setInt(2, dto.getNummer());
-		// psSE.setInt(3, dto.getkWahl());
-		// psSE.setInt(4, dto.getlWahl());
-		// psSE.setInt(5, dto.getbWahl());
-		// psSE.setInt(6, dto.getNrStb());
-		// psSE.setString(7, dto.getStb());
-		// psSE.setInt(8, dto.getNrStt());
-		// psSE.setString(9, dto.getStt());
-		// psSE.setDouble(10, dto.getShapeArea());
-		// psSE.setDouble(11, dto.getShapeLen());
-		// psSE.setObject(12, dto.getGeom());
-
-		// psSE.execute();
-		// rowsUpdated = psSE.getUpdateCount();
-		// psSE.close();
-
 		QueryRunner run = new QueryRunner();
 		Object[] params = new Object[] { dto.getId(), dto.getNummer(), dto.getkWahl(), dto.getlWahl(), dto.getbWahl(),
 				dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(), dto.getShapeLen(),
