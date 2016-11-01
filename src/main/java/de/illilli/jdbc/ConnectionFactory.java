@@ -57,7 +57,7 @@ public class ConnectionFactory {
 		Context envContext = (Context) initContext.lookup("java:/comp/env");
 		DataSource ds = (DataSource) envContext.lookup("jdbc/wahlgebiet");
 		Connection conn = ds.getConnection();
-		logger.info("got connection for '" + conn.toString() + "'");
+		logger.info("got connection for '" + conn.getCatalog() + "'");
 		return conn;
 	}
 }
