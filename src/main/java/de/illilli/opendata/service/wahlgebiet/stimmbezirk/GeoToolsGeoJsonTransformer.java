@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.illilli.opendata.service.wahlgebiet.GeoJsonTransformer;
 
+@Deprecated
 public class GeoToolsGeoJsonTransformer implements GeoJsonTransformer {
 
 	/**
@@ -22,6 +23,7 @@ public class GeoToolsGeoJsonTransformer implements GeoJsonTransformer {
 
 	private String json;
 
+	@Deprecated
 	public GeoToolsGeoJsonTransformer(SimpleFeatureCollection simpleFeatureCollection) throws IOException {
 
 		FeatureJSON fjson = new FeatureJSON(new GeometryJSON(GeoToolsGeoJsonTransformer.DECIMALS));
@@ -31,6 +33,8 @@ public class GeoToolsGeoJsonTransformer implements GeoJsonTransformer {
 
 	}
 
+	@Override
+	@Deprecated
 	public String getJson() throws JsonProcessingException {
 		return json;
 	}

@@ -34,6 +34,7 @@ public class GeoJsonStimmbezirkeFacade implements Facade {
 		setFeatureSource(url);
 	}
 
+	@Deprecated
 	void setFeatureSource(URL url) throws IOException {
 		if (dataStore == null) {
 			params = new HashMap<String, Object>();

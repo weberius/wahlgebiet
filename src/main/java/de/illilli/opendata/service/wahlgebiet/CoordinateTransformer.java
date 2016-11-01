@@ -22,18 +22,21 @@ import com.vividsolutions.jts.geom.Geometry;
 
 import de.illilli.opendata.service.Config;
 
+@Deprecated
 public class CoordinateTransformer {
 
 	private ListFeatureCollection newProjectionCollection;
 	private SimpleFeatureSource featureSource;
 	private SimpleFeatureCollection featureCollection;
 
+	@Deprecated
 	public CoordinateTransformer(final SimpleFeatureSource featureSource) throws IOException,
 			NoSuchAuthorityCodeException, FactoryException, MismatchedDimensionException, TransformException {
 		this.featureSource = featureSource;
 		this.featureCollection = featureSource.getFeatures();
 	}
 
+	@Deprecated
 	public SimpleFeatureCollection transform(final SimpleFeatureCollection featureCollection)
 			throws MismatchedDimensionException, NoSuchAuthorityCodeException, IOException, FactoryException,
 			TransformException {
@@ -42,6 +45,7 @@ public class CoordinateTransformer {
 		return newProjectionCollection;
 	}
 
+	@Deprecated
 	public SimpleFeatureCollection transform() throws IOException, NoSuchAuthorityCodeException, FactoryException,
 			MismatchedDimensionException, TransformException {
 
