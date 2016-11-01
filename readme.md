@@ -112,6 +112,36 @@ Da zur Zeit keine Integration Test Stage zur Verfügung steht, sind alle Tests, 
 2. mvn clean install
 3. jetty run
 
+## Dependencies
+
+### tomcat
+
+Die Webapplikation benötigt folgende PostGresSQL - Bibliotheken:
+
+- postgis-jdbc-2.1.7.2.jar
+- postgresql-9.1-901-1.jdbc4.jar
+- postgresql-9.3-1104-jdbc41.jar
+
+Für Entwicklungszwecke werden die Bibliotheken über den build-Mechanismus gezogen. Für die Ausführung auf dem Tomcat müssen sie im _tomcat/lib_ Verzeichnis liegen und dürfen nicht mit der Webapplikation ausgeliefert werden. Aus diesem Grund wird in den dependencies der scope 'provided' verwendet:
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1104-jdbc41</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.postgis</groupId>
+			<artifactId>postgis-jdbc</artifactId>
+			<version>2.1.7.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+Die Bibliotheken können von [PostGres JDBC Driver](https://jdbc.postgresql.org/download.html) bezogen werden und müssen manuell in das Verzeichnis _&lt;tomcat-home&gt;/lib_ kopiert werden.
+
+Anmerkung: Die Bibliothek 'postgresql-9.1-901-1.jdbc4.jar' wird über den Maven Mechanismus gezogen.
+
 # License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>.
