@@ -22,7 +22,7 @@ Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}_ liefert die Informatio
 
 Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357)
 
-## /wahlgebiet/service/stimmbezirke/put
+## /wahlgebiet/service/load/stimmbezirke
 
 Service zum Einlesen der Stimmbezirke. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
 

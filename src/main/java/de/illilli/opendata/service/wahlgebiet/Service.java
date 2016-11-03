@@ -124,7 +124,7 @@ public class Service {
 	 * </p>
 	 * <p>
 	 * Beispiel:
-	 * <code>curl -X PUT http://localhost:8080/wahlgebiet/service/stimmbezirke/put</code>
+	 * <code>curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirke</code>
 	 * </p>
 	 * 
 	 * @return
@@ -136,13 +136,12 @@ public class Service {
 	 */
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/stimmbezirke/put")
-	public String putStimmbezirke()
+	@Path("/load/{wahlgebiet}")
+	public String load(@PathParam("wahlgebiet") String wahlgebiet)
 			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 
-		logger.info("/stimmbezirke/put called");
-
-		Facade facade = new LoadStimmbezirkFacade();
+		logger.info("/load/" + wahlgebiet + " called");
+		Facade facade = LoadWahlgebietFacadeFactory.getFacade(wahlgebiet);
 		return facade.getJson();
 	}
 
