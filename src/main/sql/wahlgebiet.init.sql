@@ -13,3 +13,22 @@ CREATE TABLE stimmbezirk (
     modtime      timestamp DEFAULT current_timestamp
 );
 SELECT AddGeometryColumn ('public','stimmbezirk','geom',4326,'MULTIPOLYGON',2);
+
+CREATE TABLE wahllokal (
+    id                   integer,
+    stimmbezirk          integer,
+    name                 varchar(256),
+    adresse              varchar(1024),
+    rollstuhlgerecht     integer,
+    bemerkung            varchar(1024),
+    abstimmbezirk        integer,
+    stadtteil            varchar(128),
+    postzustellbezirk    integer,
+    adNummer             integer,
+    stimmbezirkStadtteil varchar(128),
+    kommunalwahlbezirk   integer,
+    landtagswahlkreis    integer,
+    bundestagswahlkreis  integer,
+    modtime              timestamp DEFAULT current_timestamp
+);
+SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
