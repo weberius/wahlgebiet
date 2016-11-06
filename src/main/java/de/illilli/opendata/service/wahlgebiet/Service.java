@@ -133,12 +133,18 @@ public class Service {
 	 * @throws IOException
 	 * @throws SQLException
 	 * @throws NamingException
+	 * @throws URISyntaxException
+	 * @throws TransformException
+	 * @throws FactoryException
+	 * @throws NoSuchAuthorityCodeException
+	 * @throws MismatchedDimensionException
 	 */
 	@PUT
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/load/{wahlgebiet}")
-	public String load(@PathParam("wahlgebiet") String wahlgebiet)
-			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+	public String load(@PathParam("wahlgebiet") String wahlgebiet) throws JsonParseException, JsonMappingException,
+			IOException, SQLException, NamingException, URISyntaxException, MismatchedDimensionException,
+			NoSuchAuthorityCodeException, FactoryException, TransformException {
 
 		logger.info("/load/" + wahlgebiet + " called");
 		Facade facade = LoadWahlgebietFacadeFactory.getFacade(wahlgebiet);

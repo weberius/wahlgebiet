@@ -9,6 +9,10 @@ public class LoadFacade implements Facade {
 
 	Result result = new Result();
 
+	public LoadFacade() {
+
+	}
+
 	public LoadFacade(String msg) {
 		result.msg = msg;
 	}

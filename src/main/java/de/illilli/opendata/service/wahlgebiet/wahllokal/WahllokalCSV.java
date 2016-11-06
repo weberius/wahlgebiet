@@ -1,70 +1,88 @@
 package de.illilli.opendata.service.wahlgebiet.wahllokal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WahllokalCSV {
 
 	/**
 	 * OBJECTID
 	 */
+	@JsonProperty("OBJECTID")
 	public String objectid;
 	/**
 	 * NR_STIMMBEZIRK800
 	 */
+	@JsonProperty("NR_STIMMBEZIRK800")
 	public String nr_stimmbezirk800;
 	/**
 	 * WLK_NAME
 	 */
+	@JsonProperty("WLK_NAME")
 	public String wlk_name;
 	/**
 	 * WLK_ADRESSE
 	 */
+	@JsonProperty("WLK_ADRESSE")
 	public String wlk_adresse;
 	/**
 	 * ROLLSTUHLGERECHT
 	 */
+	@JsonProperty("ROLLSTUHLGERECHT")
 	public String rollstuhlgerecht;
 	/**
 	 * WLK_BEMERKUNG
 	 */
+	@JsonProperty("WLK_BEMERKUNG")
 	public String wlk_bemerkung;
 	/**
 	 * ABSTIMMBEZIRK
 	 */
+	@JsonProperty("ABSTIMMBEZIRK")
 	public String abstimmbezirk;
 	/**
 	 * WLK_STADTTEIL
 	 */
+	@JsonProperty("WLK_STADTTEIL")
 	public String wlk_stadtteil;
 	/**
 	 * POSTZUSTELLBEZIRK
 	 */
+	@JsonProperty("POSTZUSTELLBEZIRK")
 	public String postzustellbezirk;
 	/**
 	 * AD_NUMMER
 	 */
+	@JsonProperty("AD_NUMMER")
 	public String ad_nummer;
 	/**
 	 * KOORX
 	 */
+	@JsonProperty("KOORX")
 	public String koorx;
 	/**
 	 * KOORY
 	 */
+	@JsonProperty("KOORY")
 	public String koory;
 	/**
 	 * STIMMBEZIRK_STADTTEIL
 	 */
+	@JsonProperty("STIMMBEZIRK_STADTTEIL")
 	public String stimmbezirk_stadtteil;
 	/**
 	 * KOMMUNALWAHLBEZIRK
 	 */
+	@JsonProperty("KOMMUNALWAHLBEZIRK")
 	public String kommunalwahlbezirk;
 	/**
 	 * LANDTAGSWAHLKREIS
 	 */
+	@JsonProperty("LANDTAGSWAHLKREIS")
 	public String landtagswahlkreis;
 	/**
 	 * BUNDESTAGSWAHLKREIS
 	 */
+	@JsonProperty("BUNDESTAGSWAHLKREIS")
 	public String bundestagswahlkreis;
 
 	@Override

@@ -22,13 +22,21 @@ Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}_ liefert die Informatio
 
 Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357)
 
-## /wahlgebiet/service/load/stimmbezirke
+## /wahlgebiet/service/load/stimmbezirk
 
 Service zum Einlesen der Stimmbezirke. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
 
 Der Aufruf lautet:
 
-    curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirke
+    curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirk
+
+## /wahlgebiet/service/load/wahllokal
+
+Service zum Einlesen der Wahllokale. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
+
+Der Aufruf lautet:
+
+    curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirk
 
 ## /wahlgebiet/service/wahllokale
 
@@ -50,7 +58,9 @@ Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson 
 
 ## Tabellen anlegen
 
-	CREATE TABLE wahlgebiet (
+### stimmbezirk
+
+	CREATE TABLE stimmbezirk (
 	    id           varchar(256),
 	    nummber      integer,
 	    K_WAHL       integer,
@@ -64,7 +74,28 @@ Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson 
 	    SHAPE_LEN    double precision,
 	    modtime      timestamp DEFAULT current_timestamp
 	);
-	SELECT AddGeometryColumn ('public','wahlgebiet','geom',4326,'MULTIPOLYGON',2);
+	SELECT AddGeometryColumn ('public','stimmbezirk','geom',4326,'MULTIPOLYGON',2);
+	
+### wahllokal
+	
+	CREATE TABLE wahllokal (
+        id                   integer,
+    	stimmbezirk          integer,
+    	name                 varchar(256),
+    	adresse              varchar(1024),
+    	rollstuhlgerecht     integer,
+    	bemerkung            varchar(1024),
+    	abstimmbezirk        integer,
+    	stadtteil            varchar(128),
+    	postzustellbezirk    integer,
+    	adNummer             integer,
+    	stimmbezirkStadtteil varchar(128),
+    	kommunalwahlbezirk   integer,
+    	landtagswahlkreis    integer,
+    	bundestagswahlkreis  integer,
+    	modtime              timestamp DEFAULT current_timestamp
+    );
+    SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
 	
 ## DB-Tabellen initial einrichten
 
