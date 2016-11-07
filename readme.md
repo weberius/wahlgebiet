@@ -38,7 +38,7 @@ Service zum Einlesen der Wahllokale. Der Vorgang kann jederzeit wiederholt werde
 
 Der Aufruf lautet:
 
-    curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirk
+    curl -X PUT http://localhost:8080/wahlgebiet/service/load/wahllokal
 
 ## /wahlgebiet/service/wahllokale
 
