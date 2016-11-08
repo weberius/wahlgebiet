@@ -11,9 +11,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.illilli.opendata.koeln.arcgis.StimmbezirkeArcgis;
 import de.illilli.opendata.service.AskFor;
 import de.illilli.opendata.service.Config;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.StimmbezirkeArcgis;
 
 public class AskForStimmbezirke implements AskFor<StimmbezirkeArcgis> {
 
@@ -28,9 +28,9 @@ public class AskForStimmbezirke implements AskFor<StimmbezirkeArcgis> {
 
 	public AskForStimmbezirke(InputStream inputStream) throws JsonParseException, JsonMappingException, IOException {
 
+		logger.info("ask for stimmbezirke");
 		ObjectMapper mapper = new ObjectMapper();
 		data = mapper.readValue(inputStream, StimmbezirkeArcgis.class);
-		logger.debug(URL);
 
 	}
 
