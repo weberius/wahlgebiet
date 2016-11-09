@@ -1,9 +1,5 @@
 #Wahlgebiet
 
-[![Build Status](https://api.travis-ci.org/codeforcologne/wahlgebiet.svg?branch=master)](https://travis-ci.org/codeforcologne/wahlgebiet)
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54c094fd6e2149719a9fe54970227f46)](https://www.codacy.com/app/eberius/wahlgebiet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=codeforcologne/wahlgebiet&amp;utm_campaign=Badge_Grade)
-
 Das Projekt _wahlgebiet_ stellt Informationen zum Wahlgebiet zur Verfügung. Die Grundlage bieten Resourcen von den [Offenen Daten Köln](https://www.offenedaten-koeln.de/). Zunächst werden die Information zu Stimmbezirk und Wahllokal zur Verfügung gestellt. Perspektivisch sind aber auch Informationen zu Landtagswahlkreis, Stadtteilen und Stadtbezirken möglich. 
 
 ## Stimmbezirk
@@ -12,7 +8,12 @@ Der Stimmbezirk ist die kleinste "organisatorische Einheit bei politischen Wahle
 
 # Entwicklungsstand
 
-Dieser Service ist in Entwicklung.
+Dieser Service befinded sich in Entwicklung.
+
+[![Build Status](https://api.travis-ci.org/codeforcologne/wahlgebiet.svg?branch=master)](https://travis-ci.org/codeforcologne/wahlgebiet)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54c094fd6e2149719a9fe54970227f46)](https://www.codacy.com/app/eberius/wahlgebiet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=codeforcologne/wahlgebiet&amp;utm_campaign=Badge_Grade)
+
 
 # Schnittstellen
 
