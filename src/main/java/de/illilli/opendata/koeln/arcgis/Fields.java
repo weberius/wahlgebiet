@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Fields {
 
 	@JsonProperty("name")
-	String name;
+	public String name;
 	@JsonProperty("alias")
-	String alias;
+	public String alias;
 	@JsonProperty("type")
-	String type;
+	public String type;
 	@JsonProperty("length")
-	int length;
+	public int length;
 
 	public String getName() {
 		return name;

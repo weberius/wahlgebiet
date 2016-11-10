@@ -30,3 +30,11 @@ CREATE TABLE wahllokal (
     modtime              timestamp DEFAULT current_timestamp
 );
 SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
+
+CREATE TABLE landtagswahlkreis (
+    id                   integer,
+	nummer               integer,
+    bezeichnung          varchar(256),
+    modtime              timestamp DEFAULT current_timestamp
+);
+SELECT AddGeometryColumn ('public','landtagswahlkreis','geom',4326,'MULTIPOLYGON',2);

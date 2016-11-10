@@ -1,30 +1,16 @@
-package de.illilli.opendata.koeln.arcgis;
+package de.illilli.opendata.service.wahlgebiet.landtagswahlkreis;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import de.illilli.opendata.koeln.arcgis.Geometry;
 
 public class Feature {
 
 	@JsonProperty("attributes")
-	FieldAliases attributes;
+	public FieldAliases attributes;
 
 	@JsonProperty("geometry")
-	Geometry geometry;
-
-	public FieldAliases getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(FieldAliases attributes) {
-		this.attributes = attributes;
-	}
-
-	public Geometry getGeometry() {
-		return geometry;
-	}
-
-	public void setGeometry(Geometry geometry) {
-		this.geometry = geometry;
-	}
+	public Geometry geometry;
 
 	@Override
 	public int hashCode() {

@@ -9,14 +9,14 @@ import org.geojson.FeatureCollection;
 import org.geojson.LngLatAlt;
 import org.geojson.MultiPolygon;
 
-import de.illilli.opendata.koeln.arcgis.Feature;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature;
 
 public class ArcgisFeatureList2GeojsonFeatureCollection {
 
 	private FeatureCollection featureCollection = new FeatureCollection();
 
 	public ArcgisFeatureList2GeojsonFeatureCollection(List<Feature> featureList) {
-		for (de.illilli.opendata.koeln.arcgis.Feature feature : featureList) {
+		for (de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature feature : featureList) {
 
 			List<List<LngLatAlt>> elements = new ArrayList<>();
 

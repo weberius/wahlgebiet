@@ -97,6 +97,16 @@ Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson 
     );
     SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
 	
+### wahllokal
+	
+	CREATE TABLE landtagswahlkreis (
+        id                   integer,
+    	nummer               integer,
+    	bezeichnung          varchar(256),
+    	modtime              timestamp DEFAULT current_timestamp
+    );
+    SELECT AddGeometryColumn ('public','landtagswahlkreis','geom',4326,'MULTIPOLYGON',2);
+
 ## DB-Tabellen initial einrichten
 
     psql -h localhost -U wahlgebiet -d wahlgebiet -a -f src/main/sql/wahlgebiet.init.sql

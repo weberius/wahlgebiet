@@ -1,8 +1,11 @@
-package de.illilli.opendata.koeln.arcgis;
+package de.illilli.opendata.service.wahlgebiet.stimmbezirk;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import de.illilli.opendata.koeln.arcgis.Fields;
+import de.illilli.opendata.koeln.arcgis.SpatialReference;
 
 public class StimmbezirkeArcgis {
 

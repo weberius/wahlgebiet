@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vividsolutions.jts.geom.MultiPolygon;
 
-import de.illilli.opendata.koeln.arcgis.Feature;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature;
 
 public class SimpleFeatureStimmbezirk2DTO {
 

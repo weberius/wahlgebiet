@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SpatialReference {
 
 	@JsonProperty("wkid")
-	String wkid;
+	public String wkid;
 
 	@JsonProperty("latestWkid")
-	String latestWkid;
+	public String latestWkid;
 
 	public String getWkid() {
 		return wkid;

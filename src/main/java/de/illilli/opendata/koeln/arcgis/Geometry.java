@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Geometry {
 
 	@JsonProperty("rings")
-	double[][][] rings;
+	public double[][][] rings;
 
 	public double[][][] getRings() {
 		return rings;

@@ -13,11 +13,11 @@ import org.geotools.data.simple.SimpleFeatureSource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import de.illilli.jdbc.UpdateData;
-import de.illilli.opendata.koeln.arcgis.Feature;
-import de.illilli.opendata.koeln.arcgis.StimmbezirkeArcgis;
 import de.illilli.opendata.service.AskFor;
 import de.illilli.opendata.service.Facade;
 import de.illilli.opendata.service.wahlgebiet.askFor.AskForStimmbezirke;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.StimmbezirkeArcgis;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.DeleteStimmbezirk;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.GeojsonFeatureStimmbezirk2DTO;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.InsertStimmbezirk;

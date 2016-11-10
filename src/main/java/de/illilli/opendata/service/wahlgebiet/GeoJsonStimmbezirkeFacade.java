@@ -21,13 +21,13 @@ import org.opengis.referencing.operation.TransformException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.illilli.opendata.koeln.arcgis.Feature;
-import de.illilli.opendata.koeln.arcgis.StimmbezirkeArcgis;
 import de.illilli.opendata.service.AskFor;
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
 import de.illilli.opendata.service.wahlgebiet.askFor.AskForStimmbezirke;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.GeoToolsGeoJsonTransformer;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.StimmbezirkeArcgis;
 
 public class GeoJsonStimmbezirkeFacade implements Facade {
 

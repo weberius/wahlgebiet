@@ -12,8 +12,8 @@ import org.geojson.MultiPolygon;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.illilli.opendata.koeln.arcgis.Feature;
-import de.illilli.opendata.koeln.arcgis.StimmbezirkeArcgis;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.StimmbezirkeArcgis;
 
 /**
  * Diese Klasse wandelt ein StimmbezirkeArcgis - Objekt in eine geojson -
@@ -26,7 +26,7 @@ public class Arcgis2Geojson {
 	public Arcgis2Geojson(StimmbezirkeArcgis stimmbezirkeFromArcgis) {
 		List<Feature> featureList = stimmbezirkeFromArcgis.getFeatures();
 
-		for (de.illilli.opendata.koeln.arcgis.Feature feature : featureList) {
+		for (de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature feature : featureList) {
 
 			List<List<LngLatAlt>> elements = new ArrayList<>();
 

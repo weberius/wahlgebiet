@@ -12,9 +12,6 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.operation.TransformException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.Gson;
-
 import de.illilli.jdbc.UpdateData;
 import de.illilli.opendata.service.AskFor;
 import de.illilli.opendata.service.wahlgebiet.askFor.AskForWahllokale;
@@ -49,11 +46,6 @@ public class LoadWahllokalFacade extends LoadFacade {
 		result.dataNotInserted = dataNotInserted;
 		result.dataInserted = dataInserted;
 		result.msg = "Data loaded";
-	}
-
-	@Override
-	public String getJson() throws JsonProcessingException {
-		return new Gson().toJson(result);
 	}
 
 }

@@ -24,6 +24,8 @@ public class LoadWahlgebietFacadeFactory {
 			facade = new LoadStimmbezirkFacade();
 		} else if ("wahllokal".equalsIgnoreCase(wahlgebiet)) {
 			facade = new LoadWahllokalFacade();
+		} else if ("landtagswahlkreis".equalsIgnoreCase(wahlgebiet)) {
+			facade = new LoadLandtagswahlkreiseFacade();
 		} else {
 			facade = new LoadFacade("no facade for " + wahlgebiet + " found. No data loaded.");
 		}

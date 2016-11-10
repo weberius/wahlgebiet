@@ -42,9 +42,9 @@ public class Service {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/empty")
+	@Path("/ping")
 	public String getEmpty() {
-		return "{empty}";
+		return "{\"status\":\"alive\"}";
 	}
 
 	/**
@@ -124,7 +124,17 @@ public class Service {
 	 * </p>
 	 * <p>
 	 * Beispiel:
-	 * <code>curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirke</code>
+	 * <ul>
+	 * <li>
+	 * <code>curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirk</code>
+	 * </li>
+	 * <li>
+	 * <code>curl -X PUT http://localhost:8080/wahlgebiet/service/load/wahllokal</code>
+	 * </li>
+	 * <li>
+	 * <code>curl -X PUT http://localhost:8080/wahlgebiet/service/load/landtagswahlkreis</code>
+	 * </li>
+	 * </ul>
 	 * </p>
 	 * 
 	 * @return

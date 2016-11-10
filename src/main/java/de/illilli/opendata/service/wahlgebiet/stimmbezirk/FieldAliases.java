@@ -1,4 +1,4 @@
-package de.illilli.opendata.koeln.arcgis;
+package de.illilli.opendata.service.wahlgebiet.stimmbezirk;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
