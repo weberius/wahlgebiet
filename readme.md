@@ -1,7 +1,5 @@
 #Wahlgebiet
 
-[![Build Status](https://api.travis-ci.org/codeforcologne/wahlgebiet.svg?branch=master)](https://travis-ci.org/codeforcologne/wahlgebiet)
-
 Das Projekt _wahlgebiet_ stellt Informationen zum Wahlgebiet zur Verfügung. Die Grundlage bieten Resourcen von den [Offenen Daten Köln](https://www.offenedaten-koeln.de/). Zunächst werden die Information zu Stimmbezirk und Wahllokal zur Verfügung gestellt. Perspektivisch sind aber auch Informationen zu Landtagswahlkreis, Stadtteilen und Stadtbezirken möglich. 
 
 ## Stimmbezirk
@@ -10,7 +8,12 @@ Der Stimmbezirk ist die kleinste "organisatorische Einheit bei politischen Wahle
 
 # Entwicklungsstand
 
-Dieser Service ist in Entwicklung.
+Dieser Service befinded sich in Entwicklung.
+
+[![Build Status](https://api.travis-ci.org/codeforcologne/wahlgebiet.svg?branch=master)](https://travis-ci.org/codeforcologne/wahlgebiet)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54c094fd6e2149719a9fe54970227f46)](https://www.codacy.com/app/eberius/wahlgebiet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=codeforcologne/wahlgebiet&amp;utm_campaign=Badge_Grade)
+
 
 # Schnittstellen
 
@@ -38,7 +41,7 @@ Service zum Einlesen der Wahllokale. Der Vorgang kann jederzeit wiederholt werde
 
 Der Aufruf lautet:
 
-    curl -X PUT http://localhost:8080/wahlgebiet/service/load/wahllokal
+    curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirk
 
 ## /wahlgebiet/service/wahllokale
 
@@ -72,6 +75,8 @@ Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson 
 	    STB          varchar(256),
 	    NR_STT       integer,
 	    STT          varchar(256),
+	    SHAPE_AREA   double precision,
+	    SHAPE_LEN    double precision,
 	    modtime      timestamp DEFAULT current_timestamp
 	);
 	SELECT AddGeometryColumn ('public','stimmbezirk','geom',4326,'MULTIPOLYGON',2);
@@ -97,16 +102,6 @@ Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson 
     );
     SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
 	
-### wahllokal
-	
-	CREATE TABLE landtagswahlkreis (
-        id                   integer,
-    	nummer               integer,
-    	bezeichnung          varchar(256),
-    	modtime              timestamp DEFAULT current_timestamp
-    );
-    SELECT AddGeometryColumn ('public','landtagswahlkreis','geom',4326,'MULTIPOLYGON',2);
-
 ## DB-Tabellen initial einrichten
 
     psql -h localhost -U wahlgebiet -d wahlgebiet -a -f src/main/sql/wahlgebiet.init.sql
