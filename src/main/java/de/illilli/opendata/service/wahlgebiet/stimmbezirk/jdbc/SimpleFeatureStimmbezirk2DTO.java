@@ -34,8 +34,6 @@ public class SimpleFeatureStimmbezirk2DTO {
 		dto.setStb((String) feature.getAttribute(6));
 		dto.setNrStt(Integer.parseInt((String) feature.getAttribute(7)));
 		dto.setStt((String) feature.getAttribute(8));
-		dto.setShapeArea((Double) feature.getAttribute(9));
-		dto.setShapeLen((Double) feature.getAttribute(10));
 
 		MultiPolygon multiPolygon = (MultiPolygon) feature.getDefaultGeometry();
 		// new Stimmbezirk2Multipolygon(multiPolygon).getGeometry();

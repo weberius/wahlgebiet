@@ -41,14 +41,6 @@ public class StimmbezirkDTO {
 	 */
 	private String stt;
 	/**
-	 * Fläche in qm: "SHAPE_AREA":1604161.85491
-	 */
-	private double shapeArea;
-	/**
-	 * Länge des Polygon: "SHAPE_LEN":6399.97354317}
-	 */
-	private double shapeLen;
-	/**
 	 * Die MultiPolygon-Geometrie als geojson Struktur
 	 */
 	private PGgeometry geom;
@@ -125,22 +117,6 @@ public class StimmbezirkDTO {
 		this.stt = stt;
 	}
 
-	public double getShapeArea() {
-		return shapeArea;
-	}
-
-	public void setShapeArea(double shapeArea) {
-		this.shapeArea = shapeArea;
-	}
-
-	public double getShapeLen() {
-		return shapeLen;
-	}
-
-	public void setShapeLen(double shapeLen) {
-		this.shapeLen = shapeLen;
-	}
-
 	public PGgeometry getGeom() {
 		return geom;
 	}
@@ -161,11 +137,6 @@ public class StimmbezirkDTO {
 		result = prime * result + nrStb;
 		result = prime * result + nrStt;
 		result = prime * result + nummer;
-		long temp;
-		temp = Double.doubleToLongBits(shapeArea);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(shapeLen);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((stb == null) ? 0 : stb.hashCode());
 		result = prime * result + ((stt == null) ? 0 : stt.hashCode());
 		return result;
@@ -202,10 +173,6 @@ public class StimmbezirkDTO {
 			return false;
 		if (nummer != other.nummer)
 			return false;
-		if (Double.doubleToLongBits(shapeArea) != Double.doubleToLongBits(other.shapeArea))
-			return false;
-		if (Double.doubleToLongBits(shapeLen) != Double.doubleToLongBits(other.shapeLen))
-			return false;
 		if (stb == null) {
 			if (other.stb != null)
 				return false;
@@ -222,8 +189,8 @@ public class StimmbezirkDTO {
 	@Override
 	public String toString() {
 		return "StimmbezirkDTO [id=" + id + ", nummer=" + nummer + ", kWahl=" + kWahl + ", lWahl=" + lWahl + ", bWahl="
-				+ bWahl + ", nrStb=" + nrStb + ", stb=" + stb + ", nrStt=" + nrStt + ", stt=" + stt + ", shapeArea="
-				+ shapeArea + ", shapeLen=" + shapeLen + "]";
+				+ bWahl + ", nrStb=" + nrStb + ", stb=" + stb + ", nrStt=" + nrStt + ", stt=" + stt + ", geom=" + geom
+				+ "]";
 	}
 
 }

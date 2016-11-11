@@ -48,8 +48,7 @@ public class InsertStimmbezirk implements UpdateData {
 
 		QueryRunner run = new QueryRunner();
 		Object[] params = new Object[] { dto.getId(), dto.getNummer(), dto.getkWahl(), dto.getlWahl(), dto.getbWahl(),
-				dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getShapeArea(), dto.getShapeLen(),
-				dto.getGeom() };
+				dto.getNrStb(), dto.getStb(), dto.getNrStt(), dto.getStt(), dto.getGeom() };
 		rowsUpdated = run.update(conn, sql, params);
 
 		logger.info("insert " + dto.toString());

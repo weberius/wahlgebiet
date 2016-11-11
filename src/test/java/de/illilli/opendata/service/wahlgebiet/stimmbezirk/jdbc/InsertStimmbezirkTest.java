@@ -61,8 +61,6 @@ public class InsertStimmbezirkTest {
 		s.setNrStb(123);
 		s.setNrStt(123);
 		s.setNummer(123);
-		s.setShapeArea(123456789.0123);
-		s.setShapeLen(123456789.0123);
 		s.setStb("stadtbezirk");
 		s.setStt("stadtteil");
 		// s.setGeom(InsertStimmbezirkTest.getMultipolygon());
