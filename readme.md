@@ -43,6 +43,14 @@ Der Aufruf lautet:
 
     curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirk
 
+## /wahlgebiet/service/load/landtagswahlkreis
+
+Service zum Einlesen der Landtagswahlkreise. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
+
+Der Aufruf lautet:
+
+    curl -X PUT http://localhost:8080/wahlgebiet/service/load/landtagswahlkreis
+
 ## /wahlgebiet/service/wahllokale
 
 Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson Format Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale](https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale) zur Benutzung zur Verfügung. 
@@ -101,6 +109,17 @@ Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson 
     	modtime              timestamp DEFAULT current_timestamp
     );
     SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
+
+### landtagswahlkreis
+
+    CREATE TABLE landtagswahlkreis (
+        id                   integer,
+	    nummer               integer,
+        bezeichnung          varchar(256),
+        modtime              timestamp DEFAULT current_timestamp
+    );
+    SELECT AddGeometryColumn ('public','landtagswahlkreis','geom',4326,'MULTIPOLYGON',2);
+	
 	
 ## DB-Tabellen initial einrichten
 
