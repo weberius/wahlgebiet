@@ -1,15 +1,13 @@
 select 
   id, 
   nummer, 
-  k_wahl as nummerKommunalwahl,
-  L_Wahl as nummerLandtagswahl,
-  B_Wahl as nummerBundestagswahl,
-  NR_STB as nummerStadtbezirk,
-  STB as stadtbezirk,
-  NR_STT as nummerStadtteil,
-  STT as stadtteil,
-  SHAPE_AREA as flaeche,
-  SHAPE_LEN as umfang
+  K_WAHL as kWahl, 
+  L_Wahl as lWahl, 
+  B_Wahl as bWahl, 
+  NR_STB as nrStb, 
+  STB as stb, 
+  NR_STT as nrStt, 
+  STT as stt
 from 
   stimmbezirk 
 where 

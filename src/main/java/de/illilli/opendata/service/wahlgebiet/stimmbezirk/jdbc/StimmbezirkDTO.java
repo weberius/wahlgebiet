@@ -45,6 +45,8 @@ public class StimmbezirkDTO {
 	 */
 	private PGgeometry geom;
 
+	private String geojson;
+
 	public String getId() {
 		return id;
 	}
@@ -125,11 +127,20 @@ public class StimmbezirkDTO {
 		this.geom = geom;
 	}
 
+	public String getGeojson() {
+		return geojson;
+	}
+
+	public void setGeojson(String geojson) {
+		this.geojson = geojson;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + bWahl;
+		result = prime * result + ((geojson == null) ? 0 : geojson.hashCode());
 		result = prime * result + ((geom == null) ? 0 : geom.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + kWahl;
@@ -152,6 +163,11 @@ public class StimmbezirkDTO {
 			return false;
 		StimmbezirkDTO other = (StimmbezirkDTO) obj;
 		if (bWahl != other.bWahl)
+			return false;
+		if (geojson == null) {
+			if (other.geojson != null)
+				return false;
+		} else if (!geojson.equals(other.geojson))
 			return false;
 		if (geom == null) {
 			if (other.geom != null)
@@ -189,8 +205,7 @@ public class StimmbezirkDTO {
 	@Override
 	public String toString() {
 		return "StimmbezirkDTO [id=" + id + ", nummer=" + nummer + ", kWahl=" + kWahl + ", lWahl=" + lWahl + ", bWahl="
-				+ bWahl + ", nrStb=" + nrStb + ", stb=" + stb + ", nrStt=" + nrStt + ", stt=" + stt + ", geom=" + geom
-				+ "]";
+				+ bWahl + ", nrStb=" + nrStb + ", stb=" + stb + ", nrStt=" + nrStt + ", stt=" + stt + "]";
 	}
 
 }

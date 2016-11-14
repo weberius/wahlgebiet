@@ -13,13 +13,12 @@ import org.apache.commons.io.IOUtils;
 
 import de.illilli.jdbc.ConnectionFactory;
 import de.illilli.jdbc.DbUtilsBeanListHandler;
-import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Stimmbezirk;
 
 public class SelectStimmbezirkWherePoint {
 
 	private String queryString = "/selectStimmbezirkWherePoint.sql";
 	private static final int SRID = 4326;
-	private List<Stimmbezirk> stimmbezirkList;
+	private List<StimmbezirkDTO> stimmbezirkList;
 
 	public SelectStimmbezirkWherePoint(double lng, double lat) throws SQLException, NamingException, IOException {
 
@@ -29,15 +28,15 @@ public class SelectStimmbezirkWherePoint {
 
 		Object[] params = new Object[] { lng, lat, SRID };
 
-		BeanListHandler<Stimmbezirk> beanListHandler = new BeanListHandler<Stimmbezirk>(Stimmbezirk.class);
-		DbUtilsBeanListHandler<Stimmbezirk> rsh = new DbUtilsBeanListHandler<Stimmbezirk>(conn, beanListHandler, sql,
-				params);
+		BeanListHandler<StimmbezirkDTO> beanListHandler = new BeanListHandler<StimmbezirkDTO>(StimmbezirkDTO.class);
+		DbUtilsBeanListHandler<StimmbezirkDTO> rsh = new DbUtilsBeanListHandler<StimmbezirkDTO>(conn, beanListHandler,
+				sql, params);
 		stimmbezirkList = rsh.getList();
 
 		conn.close();
 	}
 
-	public List<Stimmbezirk> getData() {
+	public List<StimmbezirkDTO> getData() {
 		return stimmbezirkList;
 	}
 }

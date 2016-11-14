@@ -10,12 +10,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 
 import de.illilli.opendata.service.Facade;
-import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Stimmbezirk;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.SelectStimmbezirkWherePoint;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.StimmbezirkDTO;
 
 public class StimmbezirkFacade implements Facade {
 
-	private List<Stimmbezirk> stimmbezirkList;
+	private List<StimmbezirkDTO> stimmbezirkList;
 
 	public StimmbezirkFacade(double lng, double lat) throws SQLException, NamingException, IOException {
 		SelectStimmbezirkWherePoint select = new SelectStimmbezirkWherePoint(lng, lat);

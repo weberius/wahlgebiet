@@ -83,7 +83,7 @@ public class Service {
 
 	/**
 	 * <p>
-	 * Get the stimmbezirk by lat-lng geo Information.
+	 * Get the stimmbezirk by lng-lat geo Information.
 	 * </p>
 	 * 
 	 * <p>
@@ -105,7 +105,7 @@ public class Service {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/stimmbezirk/{lng}/{lat}")
-	public String getStimmbezirkByLatLng(@PathParam("lng") double lng, @PathParam("lat") double lat)
+	public String getStimmbezirkByLngLat(@PathParam("lng") double lng, @PathParam("lat") double lat)
 			throws MismatchedDimensionException, JsonProcessingException, NoSuchAuthorityCodeException, IOException,
 			FactoryException, TransformException, SQLException, NamingException {
 

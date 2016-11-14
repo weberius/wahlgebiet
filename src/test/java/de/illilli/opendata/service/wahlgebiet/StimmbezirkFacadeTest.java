@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Before;
 
-import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Stimmbezirk;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.StimmbezirkDTO;
 
 public class StimmbezirkFacadeTest {
 
@@ -13,20 +13,18 @@ public class StimmbezirkFacadeTest {
 	public void setUp() throws Exception {
 	}
 
-	public static List<Stimmbezirk> getDefaultStimmbezirk() {
-		List<Stimmbezirk> stimmbezirkList = new ArrayList<>();
-		Stimmbezirk stimmbezirk = new Stimmbezirk();
-		stimmbezirk.setFlaeche(0.0);
+	public static List<StimmbezirkDTO> getDefaultStimmbezirk() {
+		List<StimmbezirkDTO> stimmbezirkList = new ArrayList<>();
+		StimmbezirkDTO stimmbezirk = new StimmbezirkDTO();
 		stimmbezirk.setId("id");
 		stimmbezirk.setNummer(0);
-		stimmbezirk.setNummerBundestagswahl(0);
-		stimmbezirk.setNummerKommunalwahl(0);
-		stimmbezirk.setNummerLandtagswahl(0);
-		stimmbezirk.setNummerStadtbezirk(0);
-		stimmbezirk.setNummerStadtteil(0);
-		stimmbezirk.setStadtbezirk("stadtbezirk");
-		stimmbezirk.setStadtteil("stadtteil");
-		stimmbezirk.setUmfang(0.0);
+		stimmbezirk.setbWahl(0);
+		stimmbezirk.setkWahl(0);
+		stimmbezirk.setlWahl(0);
+		stimmbezirk.setNrStb(0);
+		stimmbezirk.setNrStt(0);
+		stimmbezirk.setStb("stadtbezirk");
+		stimmbezirk.setStt("stadtteil");
 		stimmbezirkList.add(stimmbezirk);
 		return stimmbezirkList;
 	}
