@@ -17,9 +17,13 @@ Dieser Service befinded sich in Entwicklung.
 
 # Schnittstellen
 
-## /wahlgebiet/service/stimmbezirke
+## /wahlgebiet/service/stimmbezirke?geojson
 
-Der Service _/wahlgebiet/service/stimmbezirke_ liefert alle Stimmbezirke im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke) zu Benutzung zur Verfügung. Einen grafischen Überblick liefert [https://tom.cologne.codefor.de/wahlgebiet/](https://tom.cologne.codefor.de/wahlgebiet/).
+Der Service _/wahlgebiet/service/stimmbezirke_ liefert alle Stimmbezirke im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson) zu Benutzung zur Verfügung. Einen grafischen Überblick liefert [https://tom.cologne.codefor.de/wahlgebiet/](https://tom.cologne.codefor.de/wahlgebiet/).
+
+## /wahlgebiet/service/landtagswahlkreise?geojson
+
+Der Service _/wahlgebiet/service/landtagswahlkreise_ liefert alle Landtagswahlkreise im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson) zu Benutzung zur Verfügung.
 
 ## /wahlgebiet/service/stimmbezirk/{lat}/{lng}
 
