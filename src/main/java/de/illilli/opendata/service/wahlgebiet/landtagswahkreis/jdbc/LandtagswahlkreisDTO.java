@@ -20,9 +20,13 @@ public class LandtagswahlkreisDTO {
 	 */
 	private String bezeichnung;
 	/**
-	 * Die MultiPolygon-Geometrie als geojson Struktur
+	 * Die MultiPolygon-Geometrie als PGgeometry
 	 */
 	private PGgeometry geom;
+	/**
+	 * Die MultiPolygon-Geometrie als geojson Struktur
+	 */
+	private String geojson;
 
 	public int getId() {
 		return id;
@@ -56,11 +60,20 @@ public class LandtagswahlkreisDTO {
 		this.geom = geom;
 	}
 
+	public String getGeojson() {
+		return geojson;
+	}
+
+	public void setGeojson(String geojson) {
+		this.geojson = geojson;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bezeichnung == null) ? 0 : bezeichnung.hashCode());
+		result = prime * result + ((geojson == null) ? 0 : geojson.hashCode());
 		result = prime * result + ((geom == null) ? 0 : geom.hashCode());
 		result = prime * result + id;
 		result = prime * result + nummer;
@@ -80,6 +93,11 @@ public class LandtagswahlkreisDTO {
 			if (other.bezeichnung != null)
 				return false;
 		} else if (!bezeichnung.equals(other.bezeichnung))
+			return false;
+		if (geojson == null) {
+			if (other.geojson != null)
+				return false;
+		} else if (!geojson.equals(other.geojson))
 			return false;
 		if (geom == null) {
 			if (other.geom != null)

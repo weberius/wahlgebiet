@@ -79,6 +79,7 @@ public class Service {
 		} else {
 			return "not implemented; use '/wahlgebiet/service/stimmbezirke?geojson' instead";
 		}
+
 	}
 
 	/**
@@ -194,6 +195,37 @@ public class Service {
 			return new GeoJsonWahllokalFacade().getJson();
 		} else {
 			return "not implemented; use '/wahlgebiet/service/wahllokale?geojson' instead";
+		}
+	}
+
+	/**
+	 * 
+	 * Example:
+	 * <p>
+	 * <a href=
+	 * "http://localhost:8080/wahlgebiet/service/landtagswahlkreise?geojson">
+	 * /wahlgebiet/service/landtagswahlkreise?geojson</a>
+	 * </p>
+	 * 
+	 * @return
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/landtagswahlkreise")
+	public String getLandtagswahlkreise() throws IOException, SQLException, NamingException {
+		logger.info("/landtagswahlkreise called");
+
+		request.setCharacterEncoding(Config.getProperty("encoding"));
+		response.setCharacterEncoding(Config.getProperty("encoding"));
+
+		boolean isGeojson = request.getParameter("geojson") != null;
+		if (isGeojson) {
+			return new GeoJsonLandtagswahlkreiseFacade().getJson();
+		} else {
+			return "not implemented; use '/wahlgebiet/service/landtagswahlkreise?geojson' instead";
 		}
 	}
 
