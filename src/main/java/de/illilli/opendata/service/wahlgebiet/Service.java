@@ -83,6 +83,50 @@ public class Service {
 	}
 
 	/**
+	 * 
+	 * Get information about a specific stimmbezirk. Example:
+	 * <p>
+	 * <a href="http://localhost:8080/wahlgebiet/service/stimmbezirk/10101">
+	 * /wahlgebiet/service/stimmbezirk/{number}</a>
+	 * </p>
+	 * <p>
+	 * <a href=
+	 * "http://localhost:8080/wahlgebiet/service/stimmbezirk/10101?geojson">
+	 * /wahlgebiet/service/stimmbezirk/{number}?geojson</a>
+	 * </p>
+	 * 
+	 * @param number
+	 * @return
+	 * @throws MismatchedDimensionException
+	 * @throws JsonProcessingException
+	 * @throws NoSuchAuthorityCodeException
+	 * @throws IOException
+	 * @throws FactoryException
+	 * @throws TransformException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/stimmbezirk/{number}")
+	public String getStimmbezirkByNumber(@PathParam("number") int number)
+			throws MismatchedDimensionException, JsonProcessingException, NoSuchAuthorityCodeException, IOException,
+			FactoryException, TransformException, SQLException, NamingException {
+
+		logger.info("/stimmbezirk/" + number);
+		request.setCharacterEncoding(Config.getProperty("encoding"));
+		response.setCharacterEncoding(Config.getProperty("encoding"));
+		boolean isGeojson = request.getParameter("geojson") != null;
+
+		if (isGeojson) {
+			return new GeoJsonStimmbezirkByNumberFacade(number).getJson();
+		} else {
+			return new StimmbezirkByNumberFacade(number).getJson();
+		}
+
+	}
+
+	/**
 	 * <p>
 	 * Get the stimmbezirk by lng-lat geo Information.
 	 * </p>
