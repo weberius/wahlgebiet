@@ -26,6 +26,10 @@ public class GeoJsonStimmbezirkByNumberFacade implements Facade {
 	private StimmbezirkDTO dto;
 	private FeatureCollection featureCollection;
 
+	public GeoJsonStimmbezirkByNumberFacade(List<Integer> numberList) {
+
+	}
+
 	public GeoJsonStimmbezirkByNumberFacade(int number) throws SQLException, NamingException, IOException {
 
 		List<Feature> featureList = new ArrayList<>();

@@ -3,7 +3,7 @@ package de.illilli.opendata.service.wahlgebiet.landtagswahkreis.jdbc;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.postgis.LinearRing;
 import org.postgis.MultiPolygon;
 import org.postgis.PGgeometry;
@@ -19,8 +19,8 @@ public class LandtagswahlkreisFeature2DTO {
 	public LandtagswahlkreisFeature2DTO(Feature feature) {
 
 		this.dto = new LandtagswahlkreisDTO();
-		this.dto.setId(NumberUtils.toInt(feature.attributes.objectid));
-		this.dto.setNummer(NumberUtils.toInt(feature.attributes.nummer));
+		this.dto.setId(NumberUtils.createInteger(feature.attributes.objectid));
+		this.dto.setNummer(NumberUtils.createInteger(feature.attributes.nummer));
 		this.dto.setBezeichnung(feature.attributes.bezeichnung);
 		this.dto.setGeom(getGeom(feature));
 	}

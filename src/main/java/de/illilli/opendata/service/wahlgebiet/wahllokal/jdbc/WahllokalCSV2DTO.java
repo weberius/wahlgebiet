@@ -1,6 +1,6 @@
 package de.illilli.opendata.service.wahlgebiet.wahllokal.jdbc;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
@@ -28,19 +28,19 @@ public class WahllokalCSV2DTO {
 			throws MismatchedDimensionException, NoSuchAuthorityCodeException, FactoryException, TransformException {
 
 		dto = new WahllokalDTO();
-		dto.setAbstimmbezirk(NumberUtils.toInt(csv.abstimmbezirk));
-		dto.setAdNummer(NumberUtils.toInt(csv.ad_nummer));
+		dto.setAbstimmbezirk(NumberUtils.createInteger(csv.abstimmbezirk));
+		dto.setAdNummer(NumberUtils.createInteger(csv.ad_nummer));
 		dto.setAdresse(csv.wlk_adresse);
 		dto.setBemerkung(csv.wlk_bemerkung);
-		dto.setBundestagswahlkreis(NumberUtils.toInt(csv.bundestagswahlkreis));
-		dto.setKommunalwahlbezirk(NumberUtils.toInt(csv.kommunalwahlbezirk));
-		dto.setLandtagswahlkreis(NumberUtils.toInt(csv.landtagswahlkreis));
+		dto.setBundestagswahlkreis(NumberUtils.createInteger(csv.bundestagswahlkreis));
+		dto.setKommunalwahlbezirk(NumberUtils.createInteger(csv.kommunalwahlbezirk));
+		dto.setLandtagswahlkreis(NumberUtils.createInteger(csv.landtagswahlkreis));
 		dto.setName(csv.wlk_name);
-		dto.setObjectid(NumberUtils.toInt(csv.objectid));
-		dto.setPostzustellbezirk(NumberUtils.toInt(csv.postzustellbezirk));
-		dto.setRollstuhlgerecht(NumberUtils.toInt(csv.rollstuhlgerecht));
+		dto.setObjectid(NumberUtils.createInteger(csv.objectid));
+		dto.setPostzustellbezirk(NumberUtils.createInteger(csv.postzustellbezirk));
+		dto.setRollstuhlgerecht(NumberUtils.createInteger(csv.rollstuhlgerecht));
 		dto.setStadtteil(csv.wlk_stadtteil);
-		dto.setStimmbezirk(NumberUtils.toInt(csv.nr_stimmbezirk800));
+		dto.setStimmbezirk(NumberUtils.createInteger(csv.nr_stimmbezirk800));
 		dto.setStimmbezirkStadtteil(csv.stimmbezirk_stadtteil);
 
 		PGgeometry geom = new ConvertCoordinate2PGgeometry(csv.koorx, csv.koory).getGeom();

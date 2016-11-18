@@ -1,6 +1,6 @@
 package de.illilli.opendata.service.wahlgebiet.wahllokal.jdbc;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
 import org.opengis.geometry.MismatchedDimensionException;
