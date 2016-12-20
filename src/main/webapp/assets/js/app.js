@@ -214,11 +214,6 @@ var wahllokalLayer = L.geoJson(null);
 var wahllokals = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
-      icon: L.icon({
-        iconSize: [24, 28],
-        iconAnchor: [12, 28],
-        popupAnchor: [0, -25]
-      }),
       title: feature.properties.NAME,
       riseOnHover: true
     });
@@ -253,13 +248,14 @@ var wahllokals = L.geoJson(null, {
 });
 $.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson", function (data) {
   wahllokals.addData(data);
+  map.addLayer(wahllokalLayer);
 });
 
 map = L.map("map", {
   zoom: 10,
   center: [50.94135, 6.95819],
 //  layers: [cartoLight, boroughs, markerClusters, highlight],
-  layers: [cartoLight, markerClusters, boroughs, lwkreis,  highlight],
+  layers: [cartoLight, markerClusters, boroughs, lwkreis, highlight],
   zoomControl: false,
   attributionControl: false
 });
