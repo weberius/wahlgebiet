@@ -35,10 +35,20 @@ public class GeoJsonLandtagswahlkreiseFacade implements Facade {
 
 	public GeoJsonLandtagswahlkreiseFacade()
 			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+		// lese aus Datenbank
+		setFeatureCollection(new SelectLandtagswahlkreiseGeojson());
+	}
+
+	public GeoJsonLandtagswahlkreiseFacade(String wahlkreise)
+			throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
+		// lese aus Datenbank
+		setFeatureCollection(new SelectLandtagswahlkreiseGeojson(wahlkreise));
+	}
+
+	void setFeatureCollection(Select<LandtagswahlkreisDTO> select) throws JsonParseException, JsonMappingException, IOException, SQLException, NamingException {
 		List<Feature> featureList = new ArrayList<>();
 
 		// lese aus Datenbank
-		Select<LandtagswahlkreisDTO> select = new SelectLandtagswahlkreiseGeojson();
 		List<LandtagswahlkreisDTO> wahlkreiseList = select.getDbObjectList();
 		for (LandtagswahlkreisDTO dto : wahlkreiseList) {
 			Feature feature = new Feature();

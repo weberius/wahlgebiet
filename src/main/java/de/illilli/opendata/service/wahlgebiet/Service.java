@@ -273,4 +273,35 @@ public class Service {
 		}
 	}
 
+	/**
+	 * Example:
+	 * <p>
+	 * <a href=
+	 * "http://localhost:8080/wahlgebiet/service/landtagswahlkreise/16,19,18?geojson">
+	 * /wahlgebiet/service/landtagswahlkreise/16,19,18?geojson</a>
+	 * </p>
+	 * 
+	 * @param wahlkreise
+	 * @return
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/landtagswahlkreise/{wahlkreise}")
+	public String getLandtagswahlkreise(@PathParam("wahlkreise") String wahlkreise) throws IOException, SQLException, NamingException {
+		logger.info("/landtagswahlkreise called");
+
+		request.setCharacterEncoding(Config.getProperty("encoding"));
+		response.setCharacterEncoding(Config.getProperty("encoding"));
+
+		boolean isGeojson = request.getParameter("geojson") != null;
+		if (isGeojson) {
+			return new GeoJsonLandtagswahlkreiseFacade(wahlkreise).getJson();
+		} else {
+			return "not implemented; use '/wahlgebiet/service/landtagswahlkreise/wahlkreise?geojson' instead";
+		}
+	}
+
 }

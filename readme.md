@@ -25,6 +25,10 @@ Der Service _/wahlgebiet/service/stimmbezirke_ liefert alle Stimmbezirke im GeoJ
 
 Der Service _/wahlgebiet/service/landtagswahlkreise_ liefert alle Landtagswahlkreise im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson) zu Benutzung zur Verfügung.
 
+## /wahlgebiet/service/landtagswahlkreise/{nummer}?geojson
+
+Der Service _/wahlgebiet/service/landtagswahlkreise/{nummer}_ liefert alle Landtagswahlkreise mit den übergebenen Nummern im GeoJson Format. Es ist möglich nur eine Nummer zu übergeben. Es können aber auch mehrere Nummer kommasepariert übergeben werden. Der Service steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson) zu Benutzung zur Verfügung.
+
 ## /wahlgebiet/service/stimmbezirk/{lat}/{lng}
 
 Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}_ liefert die Information zu einem Stimmbezirk in Abhängigkeit einer geolocation. Die Position Information wird im Format EPSG:4326 erwartet.

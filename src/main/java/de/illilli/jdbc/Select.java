@@ -47,6 +47,27 @@ public abstract class Select<T> {
 		conn.close();
 	}
 
+	protected void runSelect(BeanListHandler<T> handler, String sql, Object... params)
+			throws SQLException, NamingException, IOException {
+
+		Connection conn = ConnectionFactory.getConnection();
+
+		QueryRunner query = new QueryRunner();
+		dbObjectList = query.query(conn, sql, handler, params);
+
+		conn.close();
+	}
+
+	protected void runSelect(ResultSetHandler<T> handler, String sql, Object... params)
+			throws SQLException, NamingException, IOException {
+
+		Connection conn = ConnectionFactory.getConnection();
+
+		QueryRunner query = new QueryRunner();
+		dbObject = query.query(conn, sql, handler, params);
+
+		conn.close();
+	}
 	public String getQueryString() {
 		return queryString;
 	}
