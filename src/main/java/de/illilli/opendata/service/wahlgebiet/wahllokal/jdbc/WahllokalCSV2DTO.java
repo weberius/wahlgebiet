@@ -29,12 +29,12 @@ public class WahllokalCSV2DTO {
 
 		dto = new WahllokalDTO();
 		dto.setAbstimmbezirk(NumberUtils.createInteger(csv.abstimmbezirk));
-		dto.setAdNummer(NumberUtils.createInteger(csv.ad_nummer));
+		dto.setAdNummer(csv.ad_nummer);
 		dto.setAdresse(csv.wlk_adresse);
 		dto.setBemerkung(csv.wlk_bemerkung);
-		dto.setBundestagswahlkreis(NumberUtils.createInteger(csv.bundestagswahlkreis));
-		dto.setKommunalwahlbezirk(NumberUtils.createInteger(csv.kommunalwahlbezirk));
-		dto.setLandtagswahlkreis(NumberUtils.createInteger(csv.landtagswahlkreis));
+		dto.setBundestagswahlkreis(Integer.parseInt(csv.bundestagswahlkreis));
+		dto.setKommunalwahlbezirk(Integer.parseInt(csv.kommunalwahlbezirk));
+		dto.setLandtagswahlkreis(Integer.parseInt(csv.landtagswahlkreis));
 		dto.setName(csv.wlk_name);
 		dto.setObjectid(NumberUtils.createInteger(csv.objectid));
 		dto.setPostzustellbezirk(NumberUtils.createInteger(csv.postzustellbezirk));

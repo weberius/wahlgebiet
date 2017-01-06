@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS stimmbezirk;
 CREATE TABLE stimmbezirk (
     id           varchar(256),
     nummer       integer,
@@ -12,6 +13,7 @@ CREATE TABLE stimmbezirk (
 );
 SELECT AddGeometryColumn ('public','stimmbezirk','geom',4326,'MULTIPOLYGON',2);
 
+DROP TABLE IF EXISTS wahllokal;
 CREATE TABLE wahllokal (
     id                   integer,
     stimmbezirk          integer,
@@ -22,7 +24,7 @@ CREATE TABLE wahllokal (
     abstimmbezirk        integer,
     stadtteil            varchar(128),
     postzustellbezirk    integer,
-    adNummer             integer,
+    adNummer             varchar(16),
     stimmbezirkStadtteil varchar(128),
     kommunalwahlbezirk   integer,
     landtagswahlkreis    integer,
@@ -31,6 +33,7 @@ CREATE TABLE wahllokal (
 );
 SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
 
+DROP TABLE IF EXISTS landtagswahlkreis;
 CREATE TABLE landtagswahlkreis (
     id                   integer,
 	nummer               integer,

@@ -19,7 +19,7 @@ public class WahllokalDTO {
 	private int abstimmbezirk;
 	private String stadtteil;
 	private int postzustellbezirk;
-	private int adNummer;
+	private String adNummer;
 	private String stimmbezirkStadtteil;
 	private int kommunalwahlbezirk;
 	private int landtagswahlkreis;
@@ -99,11 +99,11 @@ public class WahllokalDTO {
 		this.postzustellbezirk = postzustellbezirk;
 	}
 
-	public int getAdNummer() {
+	public String getAdNummer() {
 		return adNummer;
 	}
 
-	public void setAdNummer(int adNummer) {
+	public void setAdNummer(String adNummer) {
 		this.adNummer = adNummer;
 	}
 
@@ -146,7 +146,7 @@ public class WahllokalDTO {
 	public void setGeom(PGgeometry geom) {
 		this.geom = geom;
 	}
-	
+
 	public String getGeojson() {
 		return geojson;
 	}
@@ -155,17 +155,15 @@ public class WahllokalDTO {
 		this.geojson = geojson;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + abstimmbezirk;
-		result = prime * result + adNummer;
+		result = prime * result + ((adNummer == null) ? 0 : adNummer.hashCode());
 		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
 		result = prime * result + ((bemerkung == null) ? 0 : bemerkung.hashCode());
 		result = prime * result + bundestagswahlkreis;
-		result = prime * result + ((geom == null) ? 0 : geom.hashCode());
 		result = prime * result + kommunalwahlbezirk;
 		result = prime * result + landtagswahlkreis;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -189,7 +187,10 @@ public class WahllokalDTO {
 		WahllokalDTO other = (WahllokalDTO) obj;
 		if (abstimmbezirk != other.abstimmbezirk)
 			return false;
-		if (adNummer != other.adNummer)
+		if (adNummer == null) {
+			if (other.adNummer != null)
+				return false;
+		} else if (!adNummer.equals(other.adNummer))
 			return false;
 		if (adresse == null) {
 			if (other.adresse != null)
@@ -202,11 +203,6 @@ public class WahllokalDTO {
 		} else if (!bemerkung.equals(other.bemerkung))
 			return false;
 		if (bundestagswahlkreis != other.bundestagswahlkreis)
-			return false;
-		if (geom == null) {
-			if (other.geom != null)
-				return false;
-		} else if (!geom.equals(other.geom))
 			return false;
 		if (kommunalwahlbezirk != other.kommunalwahlbezirk)
 			return false;
@@ -247,6 +243,5 @@ public class WahllokalDTO {
 				+ kommunalwahlbezirk + ", landtagswahlkreis=" + landtagswahlkreis + ", bundestagswahlkreis="
 				+ bundestagswahlkreis + "]";
 	}
-
 
 }
