@@ -3,6 +3,9 @@ package de.illilli.opendata.service.wahlgebiet;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
 
 import org.apache.commons.io.IOUtils;
 import org.geotools.feature.SchemaException;
@@ -14,6 +17,7 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.operation.TransformException;
 
+import de.illilli.jdbc.ConnectionEnvironment;
 import de.illilli.opendata.service.Facade;
 
 public class GeoJsonWahllokalFacadeTest {
@@ -22,14 +26,12 @@ public class GeoJsonWahllokalFacadeTest {
 	public void setUp() throws Exception {
 	}
 
-	@Test
-	public void testGeoJsonWahllokalFacade() throws URISyntaxException, IOException, SchemaException,
-			NoSuchAuthorityCodeException, FactoryException, MismatchedDimensionException, TransformException {
+	public static void main(String[] args) throws URISyntaxException, IOException, SchemaException,
+			NoSuchAuthorityCodeException, FactoryException, MismatchedDimensionException, TransformException, SQLException, NamingException {
+		ConnectionEnvironment.setUpConnectionForJndi();
+
 		Facade facade = new GeoJsonWahllokalFacade();
-		InputStream inputStream = this.getClass().getResourceAsStream("/wahllokale.json");
-		String expected = IOUtils.toString(inputStream);
-		String actual = facade.getJson();
-		Assert.assertEquals(expected, actual);
+		System.out.println(facade.getJson());
 	}
 
 }

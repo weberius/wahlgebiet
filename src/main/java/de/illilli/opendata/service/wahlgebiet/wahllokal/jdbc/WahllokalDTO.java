@@ -25,6 +25,7 @@ public class WahllokalDTO {
 	private int landtagswahlkreis;
 	private int bundestagswahlkreis;
 	private PGgeometry geom;
+	private String geojson;
 
 	public int getObjectid() {
 		return objectid;
@@ -145,6 +146,15 @@ public class WahllokalDTO {
 	public void setGeom(PGgeometry geom) {
 		this.geom = geom;
 	}
+	
+	public String getGeojson() {
+		return geojson;
+	}
+
+	public void setGeojson(String geojson) {
+		this.geojson = geojson;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -237,5 +247,6 @@ public class WahllokalDTO {
 				+ kommunalwahlbezirk + ", landtagswahlkreis=" + landtagswahlkreis + ", bundestagswahlkreis="
 				+ bundestagswahlkreis + "]";
 	}
+
 
 }

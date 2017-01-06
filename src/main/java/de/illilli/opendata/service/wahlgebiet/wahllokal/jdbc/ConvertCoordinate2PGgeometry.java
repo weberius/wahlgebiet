@@ -14,6 +14,22 @@ import org.postgis.PGgeometry;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 
+/**
+ * <p>
+ * <a href=
+ * "http://docs.geotools.org/latest/userguide/tutorial/feature/csv2shp.html">
+ * Feature Tutorial - CSV2SHP</a>
+ * </p>
+ * <p>
+ * <a href="https://sis.apache.org/tables/CoordinateReferenceSystems.html">
+ * Apache SIS™ Coordinate Reference System (CRS) codes</a>
+ * </p>
+ * <p>
+ * <a href="https://maps.omniscale.com/en/openstreetmap/epsg-32632">
+ * OpenStreetMap in EPSG: 32632 – WGS 84 / UTM zone 32N</a>
+ * </p>
+ *
+ */
 public class ConvertCoordinate2PGgeometry {
 
 	private PGgeometry geom;

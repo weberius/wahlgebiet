@@ -3,13 +3,18 @@ package de.illilli.opendata.service.wahlgebiet;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.NamingException;
+
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;
+import org.geojson.GeoJsonObject;
 import org.geojson.LngLatAlt;
 import org.geotools.feature.SchemaException;
 import org.geotools.geometry.jts.JTS;
@@ -28,72 +33,40 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
 
+import de.illilli.jdbc.Select;
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
 import de.illilli.opendata.service.wahlgebiet.wahllokal.WahllokalCSV;
 import de.illilli.opendata.service.wahlgebiet.wahllokal.WahllokalCSVReader;
+import de.illilli.opendata.service.wahlgebiet.wahllokal.jdbc.SelectWahllokale;
+import de.illilli.opendata.service.wahlgebiet.wahllokal.jdbc.WahllokalDTO;
 
-/**
- * <p>
- * <a href=
- * "http://docs.geotools.org/latest/userguide/tutorial/feature/csv2shp.html">
- * Feature Tutorial - CSV2SHP</a>
- * </p>
- * <p>
- * <a href="https://sis.apache.org/tables/CoordinateReferenceSystems.html">
- * Apache SIS™ Coordinate Reference System (CRS) codes</a>
- * </p>
- * <p>
- * <a href="https://maps.omniscale.com/en/openstreetmap/epsg-32632">
- * OpenStreetMap in EPSG: 32632 – WGS 84 / UTM zone 32N</a>
- * </p>
- * 
- *
- */
 public class GeoJsonWahllokalFacade implements Facade {
 
-	CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:3857");
-	CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:4326");
-
 	List<Feature> featureList = new ArrayList<>();
-	private FeatureCollection featureCollection;
+	private FeatureCollection featureCollection = new FeatureCollection();
 
-	public GeoJsonWahllokalFacade() throws URISyntaxException, IOException, SchemaException,
-			NoSuchAuthorityCodeException, FactoryException, MismatchedDimensionException, TransformException {
-
-		URL url = GeoJsonWahllokalFacade.class.getResource(Config.getProperty("wahllokal.csv.file"));
-		WahllokalCSVReader wahllokalReader = new WahllokalCSVReader(url);
-		List<WahllokalCSV> wahllokalList = wahllokalReader.getList();
-
-		for (WahllokalCSV csv : wahllokalList) {
-
-			GeometryFactory gf = new GeometryFactory();
-			Coordinate coord = new Coordinate(Double.parseDouble(csv.koorx), Double.parseDouble(csv.koory));
-			Point sourceGeometry = gf.createPoint(coord);
-
-			MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, false);
-			Geometry targetGeometry = JTS.transform(sourceGeometry, transform);
-
+	public GeoJsonWahllokalFacade() throws SQLException, NamingException, IOException {	
+		
+		Select<WahllokalDTO> select = new SelectWahllokale();
+		List<WahllokalDTO> dtoList = select.getDbObjectList();
+		
+		for (WahllokalDTO dto: dtoList) {
 			Feature feature = new Feature();
-			feature.setId(csv.nr_stimmbezirk800);
-			org.geojson.Point point = new org.geojson.Point();
-			double longitude = targetGeometry.getCoordinate().y;
-			double latitude = targetGeometry.getCoordinate().x;
-
-			LngLatAlt geometry = new LngLatAlt(longitude, latitude);
-			point.setCoordinates(geometry);
-			feature.setGeometry(point);
-
-			Map<String, Object> properties = new Hashtable<String, Object>();
-			properties.put("WLK_NAME", csv.wlk_name);
-			properties.put("WLK_ADRESSE", csv.wlk_adresse);
-			properties.put("POSTZUSTELLBEZIRK", csv.postzustellbezirk);
+			feature.setId(dto.getObjectid()+ "");
+			
+			Map<String, Object> properties = new HashMap<>();
+			properties.put("WLK_NAME", dto.getName());
+			properties.put("WLK_ADRESSE", dto.getAdresse());
+			properties.put("POSTZUSTELLBEZIRK", dto.getPostzustellbezirk());
 
 			feature.setProperties(properties);
 
+			GeoJsonObject geomertry = new ObjectMapper().readValue(dto.getGeojson(), GeoJsonObject.class);
+			feature.setGeometry(geomertry);
 			featureList.add(feature);
 		}
-		featureCollection = new FeatureCollection();
+		
 		featureCollection.addAll(featureList);
 	}
 

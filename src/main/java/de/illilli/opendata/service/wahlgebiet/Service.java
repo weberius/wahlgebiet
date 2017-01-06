@@ -1,6 +1,7 @@
 package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 
@@ -212,22 +213,16 @@ public class Service {
 	 * <a href="http://localhost:8080/wahlgebiet/service/wahllokale?geojson">
 	 * /wahlgebiet/service/wahllokale?geojson</a>
 	 * </p>
-	 * 
-	 * 
 	 * @return
-	 * @throws URISyntaxException
+	 * @throws JsonProcessingException
+	 * @throws SQLException
+	 * @throws NamingException
 	 * @throws IOException
-	 * @throws SchemaException
-	 * @throws FactoryException
-	 * @throws NoSuchAuthorityCodeException
-	 * @throws TransformException
-	 * @throws MismatchedDimensionException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/wahllokale")
-	public String getWahllokale() throws URISyntaxException, IOException, SchemaException, NoSuchAuthorityCodeException,
-			FactoryException, MismatchedDimensionException, TransformException {
+	public String getWahllokale() throws JsonProcessingException, SQLException, NamingException, IOException {
 
 		logger.info("/wahllokale called");
 

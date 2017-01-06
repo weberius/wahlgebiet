@@ -29,6 +29,10 @@ import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.GeoToolsGeoJsonTransformer;
 import de.illilli.opendata.service.wahlgebiet.stimmbezirk.StimmbezirkeArcgis;
 
+/**
+ * @deprecated Don't use this anymore 
+ */
+@Deprecated
 public class GeoJsonStimmbezirkeFacade implements Facade {
 
 	private static final Logger logger = Logger.getLogger(GeoJsonStimmbezirkeFacade.class);
