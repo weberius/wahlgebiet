@@ -43,7 +43,7 @@ public class WahllokalCSV2DTO {
 		dto.setStimmbezirk(NumberUtils.createInteger(csv.nr_stimmbezirk800));
 		dto.setStimmbezirkStadtteil(csv.stimmbezirk_stadtteil);
 
-		PGgeometry geom = new ConvertCoordinate2PGgeometry(csv.koorx, csv.koory).getGeom();
+		PGgeometry geom = new ConvertCoordinate2PGgeometry(csv.koory, csv.koorx).getGeom();
 		dto.setGeom(geom);
 
 	}
