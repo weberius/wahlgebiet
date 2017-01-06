@@ -50,8 +50,8 @@ public class ConvertCoordinate2PGgeometry {
 		MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, false);
 		com.vividsolutions.jts.geom.Geometry targetGeometry = JTS.transform(sourceGeometry, transform);
 
-		org.postgis.Geometry postGisPoint = new org.postgis.Point(targetGeometry.getCoordinate().x,
-				targetGeometry.getCoordinate().y);
+		org.postgis.Geometry postGisPoint = new org.postgis.Point(targetGeometry.getCoordinate().y,
+				targetGeometry.getCoordinate().x);
 		postGisPoint.setSrid(4326);
 
 		geom = new PGgeometry(postGisPoint);
