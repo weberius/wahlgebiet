@@ -35,6 +35,10 @@ Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}_ liefert die Informatio
 
 Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357)
 
+Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}?geojson_ liefert die Informationen mit Polygon im Format GeoJson zurück. Die Position Information wird im Format EPSG:4326 erwartet.
+
+Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357?geojson)
+
 ## /wahlgebiet/service/load/stimmbezirk
 
 Service zum Einlesen der Stimmbezirke. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
