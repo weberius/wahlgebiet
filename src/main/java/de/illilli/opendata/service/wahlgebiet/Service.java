@@ -1,7 +1,6 @@
 package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 
@@ -17,7 +16,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
-import org.geotools.feature.SchemaException;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
@@ -49,6 +47,7 @@ public class Service {
 	}
 
 	/**
+	 * 
 	 * Get information about stimmbezirke. At the moment it returns an geojson.
 	 * If Example:
 	 * <p>
@@ -57,18 +56,15 @@ public class Service {
 	 * </p>
 	 * 
 	 * @return all stimmbezirke geojson formatted
-	 * @throws MismatchedDimensionException
 	 * @throws JsonProcessingException
-	 * @throws NoSuchAuthorityCodeException
+	 * @throws SQLException
+	 * @throws NamingException
 	 * @throws IOException
-	 * @throws FactoryException
-	 * @throws TransformException
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/stimmbezirke")
-	public String getStimmbezirke() throws MismatchedDimensionException, JsonProcessingException,
-			NoSuchAuthorityCodeException, IOException, FactoryException, TransformException {
+	public String getStimmbezirke() throws JsonProcessingException, SQLException, NamingException, IOException {
 
 		logger.info("/stimmbezirke called");
 		request.setCharacterEncoding(Config.getProperty("encoding"));
@@ -213,6 +209,7 @@ public class Service {
 	 * <a href="http://localhost:8080/wahlgebiet/service/wahllokale?geojson">
 	 * /wahlgebiet/service/wahllokale?geojson</a>
 	 * </p>
+	 * 
 	 * @return
 	 * @throws JsonProcessingException
 	 * @throws SQLException
@@ -285,7 +282,8 @@ public class Service {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/landtagswahlkreise/{wahlkreise}")
-	public String getLandtagswahlkreise(@PathParam("wahlkreise") String wahlkreise) throws IOException, SQLException, NamingException {
+	public String getLandtagswahlkreise(@PathParam("wahlkreise") String wahlkreise)
+			throws IOException, SQLException, NamingException {
 		logger.info("/landtagswahlkreise called");
 
 		request.setCharacterEncoding(Config.getProperty("encoding"));

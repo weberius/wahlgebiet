@@ -1,102 +1,62 @@
 package de.illilli.opendata.service.wahlgebiet;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.NamingException;
+
 import org.apache.log4j.Logger;
+import org.geojson.Feature;
 import org.geojson.FeatureCollection;
-import org.geotools.data.DataStore;
-import org.geotools.data.DataStoreFinder;
-import org.geotools.data.simple.SimpleFeatureCollection;
-import org.geotools.data.simple.SimpleFeatureSource;
-import org.opengis.geometry.MismatchedDimensionException;
-import org.opengis.referencing.FactoryException;
-import org.opengis.referencing.NoSuchAuthorityCodeException;
-import org.opengis.referencing.operation.TransformException;
+import org.geojson.GeoJsonObject;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.illilli.opendata.service.AskFor;
-import de.illilli.opendata.service.Config;
+import de.illilli.jdbc.Select;
 import de.illilli.opendata.service.Facade;
-import de.illilli.opendata.service.wahlgebiet.askFor.AskForStimmbezirke;
-import de.illilli.opendata.service.wahlgebiet.stimmbezirk.Feature;
-import de.illilli.opendata.service.wahlgebiet.stimmbezirk.GeoToolsGeoJsonTransformer;
-import de.illilli.opendata.service.wahlgebiet.stimmbezirk.StimmbezirkeArcgis;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.SelectStimmbezirke;
+import de.illilli.opendata.service.wahlgebiet.stimmbezirk.jdbc.StimmbezirkDTO;
 
-/**
- * @deprecated Don't use this anymore 
- */
-@Deprecated
 public class GeoJsonStimmbezirkeFacade implements Facade {
 
 	private static final Logger logger = Logger.getLogger(GeoJsonStimmbezirkeFacade.class);
 
-	private Map<String, Object> params;
-	SimpleFeatureSource featureSource;
-	private static DataStore dataStore;
-	private String json;
-	FeatureCollection featureCollection = new FeatureCollection();
+	private List<Feature> featureList = new ArrayList<>();
+	private FeatureCollection featureCollection = new FeatureCollection();
 
-	@Deprecated
-	public GeoJsonStimmbezirkeFacade(URL url) throws MismatchedDimensionException, NoSuchAuthorityCodeException,
-			IOException, FactoryException, TransformException {
-		setFeatureSource(url);
-		setJsonFromShape();
-	}
+	public GeoJsonStimmbezirkeFacade() throws SQLException, NamingException, IOException {
+		Select<StimmbezirkDTO> select = new SelectStimmbezirke();
+		List<StimmbezirkDTO> dtoList = select.getDbObjectList();
+		for (StimmbezirkDTO dto : dtoList) {
+			Feature feature = new Feature();
+			feature.setId(dto.getNummer() + "");
 
-	public GeoJsonStimmbezirkeFacade() throws MalformedURLException, IOException {
+			Map<String, Object> properties = new HashMap<>();
+			properties.put("nummer", dto.getNummer());
+			properties.put("kWahl", dto.getkWahl());
+			properties.put("lWahl", dto.getlWahl());
+			properties.put("bWahl", dto.getbWahl());
+			properties.put("nrStb", dto.getNrStb());
+			properties.put("stb", dto.getStb());
+			properties.put("nrStt", dto.getNrStt());
+			properties.put("stt", dto.getStt());
+			feature.setProperties(properties);
 
-		AskFor<StimmbezirkeArcgis> askFor = new AskForStimmbezirke();
-		StimmbezirkeArcgis stimmbezirkeFromArcgis = askFor.getData();
-		List<Feature> featureList = stimmbezirkeFromArcgis.getFeatures();
-		featureCollection = new ArcgisFeatureList2GeojsonFeatureCollection(featureList).getFeatureCollection();
-		json = new ObjectMapper().writeValueAsString(featureCollection);
-	}
-
-	@Deprecated
-	void setFeatureSource(URL url) throws IOException {
-		if (dataStore == null) {
-			params = new HashMap<String, Object>();
-			params.put("url", url);
-			params.put("create spatial index", false);
-			params.put("memory mapped buffer", false);
-			params.put("charset", Config.getProperty("shp.encoding"));
-
-			dataStore = DataStoreFinder.getDataStore(params);
+			GeoJsonObject geomertry = new ObjectMapper().readValue(dto.getGeojson(), GeoJsonObject.class);
+			feature.setGeometry(geomertry);
+			featureList.add(feature);
 		}
-		featureSource = dataStore.getFeatureSource(dataStore.getTypeNames()[0]);
-	}
-
-	@Deprecated
-	void setJsonFromShape() {
-
-		try {
-			CoordinateTransformer coordinateTransformer = new CoordinateTransformer(featureSource);
-			SimpleFeatureCollection simpleFeatureCollection = coordinateTransformer.transform();
-			GeoJsonTransformer shape2GeoJsonTransformer = new GeoToolsGeoJsonTransformer(simpleFeatureCollection);
-			json = shape2GeoJsonTransformer.getJson();
-		} catch (MismatchedDimensionException e) {
-			logger.error(e);
-		} catch (NoSuchAuthorityCodeException e) {
-			logger.error(e);
-		} catch (IOException e) {
-			logger.error(e);
-		} catch (FactoryException e) {
-			logger.error(e);
-		} catch (TransformException e) {
-			logger.error(e);
-		}
+		featureCollection.addAll(featureList);
 	}
 
 	@Override
 	public String getJson() throws JsonProcessingException {
-		return json;
+		return new ObjectMapper().writeValueAsString(featureCollection);
 	}
 
 }

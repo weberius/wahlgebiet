@@ -146,14 +146,14 @@ var boroughs = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     boroughSearch.push({
-      name: layer.feature.id + " " + layer.feature.properties.stadtteil,
+      name: layer.feature.id + " " + layer.feature.properties.stt,
       source: "Boroughs",
       id: L.stamp(layer),
       bounds: layer.getBounds()
     });
   }
 });
-$.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson", function (data) {
+$.getJSON("/wahlgebiet/service/stimmbezirke?geojson", function (data) {
   boroughs.addData(data);
 });
 
@@ -197,7 +197,7 @@ var lwkreis = L.geoJson(null, {
     });
   }
 });
-$.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson", function (data) {
+$.getJSON("/wahlgebiet/service/landtagswahlkreise?geojson", function (data) {
   lwkreis.addData(data);
 });
 
@@ -246,7 +246,7 @@ var wahllokals = L.geoJson(null, {
     }
   }
 });
-$.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson", function (data) {
+$.getJSON("/wahlgebiet/service/wahllokale?geojson", function (data) {
   wahllokals.addData(data);
   map.addLayer(wahllokalLayer);
 });
@@ -396,7 +396,7 @@ $(document).one("ajaxStop", function () {
   var boroughsBH = new Bloodhound({
     name: "Boroughs",
     datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
+      return Bloodhound.tokenizers.whitespace(d.stt);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     local: boroughSearch,
@@ -423,7 +423,7 @@ $(document).one("ajaxStop", function () {
     hint: false
   }, {
     name: "Boroughs",
-    displayKey: "name",
+    displayKey: "stt",
     source: boroughsBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'>Boroughs</h4>"
