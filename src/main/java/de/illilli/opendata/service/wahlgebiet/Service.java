@@ -134,6 +134,12 @@ public class Service {
 	 * /wahlgebiet/service/stimmbezirk/{lng}/{lat}</a>
 	 * </p>
 	 * 
+	 * <p>
+	 * Example: <a href=
+	 * "http://localhost:8080/wahlgebiet/service/stimmbezirk/6.958307/50.941357?geojson">
+	 * /wahlgebiet/service/stimmbezirk/{lng}/{lat}?geojson</a>
+	 * </p>
+	 * 
 	 * @return the stimmbezirk information json formatted.
 	 * @throws MismatchedDimensionException
 	 * @throws JsonProcessingException
@@ -156,7 +162,14 @@ public class Service {
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 
-		return new StimmbezirkFacade(lng, lat).getJson();
+		boolean isGeojson = request.getParameter("geojson") != null;
+
+		if (isGeojson) {
+			return new GeoJsonStimmbezirkeFacade(lng, lat).getJson();
+		} else {
+			return new StimmbezirkFacade(lng, lat).getJson();
+		}
+
 	}
 
 	/**
