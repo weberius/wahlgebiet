@@ -153,7 +153,7 @@ var boroughs = L.geoJson(null, {
     });
   }
 });
-$.getJSON("/wahlgebiet/service/stimmbezirke?geojson", function (data) {
+$.getJSON("/wahlgebiet/service/stimmbezirke?geojson&usecache", function (data) {
   boroughs.addData(data);
 });
 

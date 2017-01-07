@@ -48,11 +48,18 @@ public class Service {
 
 	/**
 	 * 
-	 * Get information about stimmbezirke. At the moment it returns an geojson.
-	 * If Example:
+	 * Liefert die GeoJson der Stimmbezirke. Example:
 	 * <p>
+	 * Mit 'geojson' werden die Stimmbezirke im Format Geojson ausgeliefert.
 	 * <a href="http://localhost:8080/wahlgebiet/service/stimmbezirke?geojson">
 	 * /wahlgebiet/service/stimmbezirke?geojson</a>
+	 * </p>
+	 * 
+	 * <p>
+	 * Mit 'usecache' wird eine bereits vorberechnete geojson - Datei
+	 * ausgeliefert. <a href=
+	 * "http://localhost:8080/wahlgebiet/service/stimmbezirke?geojson&usecache">
+	 * /wahlgebiet/service/stimmbezirke?geojson&usecache</a>
 	 * </p>
 	 * 
 	 * @return all stimmbezirke geojson formatted
@@ -70,9 +77,14 @@ public class Service {
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 		boolean isGeojson = request.getParameter("geojson") != null;
+		boolean useCache = request.getParameter("usecache") != null;
 
 		if (isGeojson) {
-			return new GeoJsonStimmbezirkeFacade().getJson();
+			if (useCache) {
+				return new CachedGeoJsonStimmbezirkeFacade("05315000").getJson();
+			} else {
+				return new GeoJsonStimmbezirkeFacade().getJson();
+			}
 		} else {
 			return "not implemented; use '/wahlgebiet/service/stimmbezirke?geojson' instead";
 		}
