@@ -246,7 +246,7 @@ var wahllokals = L.geoJson(null, {
     }
   }
 });
-$.getJSON("/wahlgebiet/service/wahllokale?geojson", function (data) {
+$.getJSON("/wahlgebiet/service/wahllokale?geojson&usecache", function (data) {
   wahllokals.addData(data);
   map.addLayer(wahllokalLayer);
 });

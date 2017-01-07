@@ -252,8 +252,14 @@ public class Service {
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 
 		boolean isGeojson = request.getParameter("geojson") != null;
+		boolean useCache = request.getParameter("usecache") != null;
+
 		if (isGeojson) {
-			return new GeoJsonWahllokalFacade().getJson();
+			if (useCache) {
+				return new CachedGeoJsonWahllokalFacade("05315000").getJson();
+			} else {
+				return new GeoJsonWahllokalFacade().getJson();
+			}
 		} else {
 			return "not implemented; use '/wahlgebiet/service/wahllokale?geojson' instead";
 		}
