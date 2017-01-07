@@ -19,7 +19,11 @@ Dieser Service befinded sich in Entwicklung.
 
 ## /wahlgebiet/service/stimmbezirke?geojson
 
-Der Service _/wahlgebiet/service/stimmbezirke_ liefert alle Stimmbezirke im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson) zu Benutzung zur Verfügung. Einen grafischen Überblick liefert [https://tom.cologne.codefor.de/wahlgebiet/](https://tom.cologne.codefor.de/wahlgebiet/).
+Der Service _/wahlgebiet/service/stimmbezirke?geojson_ liefert alle Stimmbezirke im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson) zu Benutzung zur Verfügung. Einen grafischen Überblick liefert [https://tom.cologne.codefor.de/wahlgebiet/](https://tom.cologne.codefor.de/wahlgebiet/).
+
+## /wahlgebiet/service/stimmbezirke?geojson&usecache
+
+Der Service _/wahlgebiet/service/stimmbezirke?geojson&usecache_ liefert alle Stimmbezirke im GeoJson Format. Die Informationen werden aus einer bereits erstellten Datei gelesen. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson) zu Benutzung zur Verfügung.
 
 ## /wahlgebiet/service/landtagswahlkreise?geojson
 
@@ -38,6 +42,14 @@ Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage er
 Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}?geojson_ liefert die Informationen mit Polygon im Format GeoJson zurück. Die Position Information wird im Format EPSG:4326 erwartet.
 
 Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357?geojson)
+
+## /wahlgebiet/service/wahllokale?geojson
+
+Der Service _/wahlgebiet/service/wahllokale?geojson_ liefert alle Wahllokale im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson) zur Benutzung zur Verfügung. 
+
+## /wahlgebiet/service/wahllokale?geojson&usecache
+
+Der Service _/wahlgebiet/service/wahllokale?geojson&usecache_ liefert alle Wahllokale im GeoJson Format. Es wird eine bereits erstellte geojson-Datei ausgeliefert. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson&usecache](https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson&usecache) zur Benutzung zur Verfügung. 
 
 ## /wahlgebiet/service/load/stimmbezirk
 
@@ -62,10 +74,6 @@ Service zum Einlesen der Landtagswahlkreise. Der Vorgang kann jederzeit wiederho
 Der Aufruf lautet:
 
     curl -X PUT http://localhost:8080/wahlgebiet/service/load/landtagswahlkreis
-
-## /wahlgebiet/service/wahllokale
-
-Der Service _/wahlgebiet/service/wahllokale_ liefert alle Wahllokale im GeoJson Format Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale](https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale) zur Benutzung zur Verfügung. 
 
 # Datenbank
 
