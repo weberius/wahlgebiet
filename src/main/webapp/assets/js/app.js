@@ -254,8 +254,8 @@ $.getJSON("/wahlgebiet/service/wahllokale?geojson&usecache", function (data) {
 map = L.map("map", {
   zoom: 10,
   center: [50.94135, 6.95819],
-//  layers: [cartoLight, boroughs, markerClusters, highlight],
-  layers: [cartoLight, markerClusters, boroughs, lwkreis, highlight],
+  layers: [cartoLight, boroughs, markerClusters, highlight],
+//  layers: [cartoLight, markerClusters, boroughs, lwkreis, highlight],
   zoomControl: false,
   attributionControl: false
 });
