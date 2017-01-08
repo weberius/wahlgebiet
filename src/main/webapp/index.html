@@ -49,18 +49,16 @@
             <li class="dropdown">
               <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe white"></i>&nbsp;&nbsp;Tools <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Show Legend</a></li>
-                <li class="divider hidden-xs"></li>
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn"><i class="fa fa-user"></i>&nbsp;&nbsp;Login</a></li>
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zeige Köln</a></li>
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Legende</a></li>
               </ul>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Download <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson" download="stimmbezirke.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Stimmbezirke (geojson)</a></li>
+                  <li><a href="https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson&usecache" download="stimmbezirke.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Stimmbezirke (geojson)</a></li>
                   <li><a href="https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson" download="landtagswahlkreise.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Landtagswahlkreise (geojson)</a></li>
-                  <li><a href="https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson" download="wahllokale.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Wahllokale (geojson)</a></li>
+                  <li><a href="https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson&usecache" download="wahllokale.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Wahllokale (geojson)</a></li>
                 </ul>
             </li>
             <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;POI List</a></li>
@@ -127,52 +125,44 @@
             <ul class="nav nav-tabs nav-justified" id="aboutTabs">
               <li class="active"><a href="#about" data-toggle="tab"><i class="fa fa-question-circle"></i>&nbsp;&Uuml;ber dieses Projekt</a></li>
               <li><a href="#disclaimer" data-toggle="tab"><i class="fa fa-exclamation-circle"></i>&nbsp;Disclaimer</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i>&nbsp;Metadata<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#boroughs-tab" data-toggle="tab">Stimmbezirke</a></li>
-                  <li><a href="#subway-lines-tab" data-toggle="tab">Landtagswahlkreise</a></li>
-                  <li><a href="#museums-tab" data-toggle="tab">Wahllokale</a></li>
-                </ul>
-              </li>
+              <li><a href="#featuresabout" data-toggle="tab"><i class="fa fa-globe"></i>&nbsp;Features</a></li>
             </ul>
             <div class="tab-content" id="aboutTabsContent">
               <div class="tab-pane fade active in" id="about">
-                <p>
-					Diese Webseite zeigt auf Informationen zum Wahlverhalten der Landtagswahl 2012.Diese werden durch das <a
-					href="http://www.offenedaten-koeln.de/" target="_blank">Offene
-					Daten Portal</a> der <a href="http://www.koeln.de" target="_blank">Stadt
-					Köln</a> zur Verfügung gestellt.
+				<p>
+					Dieses Projekt stellt Informationen zu geographische Strukturen, wie Stimmbezirke, 
+					Wahllokale und Landtagswahlkreise zur Verfügung. Die Grundlage bieten Resourcen von 
+					den <a href="https://www.offenedaten-koeln.de/" target="_blank">Offenen Daten Köln</a>. 
 				</p>
-	            <div class="panel panel-primary">
-					<div class="panel-heading">Features</div>
-					<ul class="list-group">
-						<li class="list-group-item">Anzeige der Informationen
-							sowohl im Desktop-Browser, als auch auf Tablet und Smartphone
-							durch Verwendung von<a
-							href="https://github.com/bmcbride/bootleaf" target="_blank">Bootleaf</a>,
-							<a href="http://getbootstrap.com/" target="_blank">Bootstrap
-								3</a> und <a href="http://leafletjs.com/" target="_blank">Leaflet</a>.
-						</li>
-						<li class="list-group-item">GPS basierte Verortung, zur
-							Ermittlung des aktuellen Standortes mit <a
-							href="https://www.mapbox.com/mapbox.js/example/v1.0.0/leaflet-locatecontrol/"
-							target="_blank">Mapbox Leaflet Locate</a>
-						</li>
-						<li class="list-group-item">Marker clustering von
-							Wahllokalen bei höheren Zoomleveln zur Erhöhung der
-							Anzeigegeschwindigkeit mit <a
-							href="https://github.com/Leaflet/Leaflet.markercluster"
-							target="_blank">Leaflet marker cluster plugin</a>
-						</li>
-						<li class="list-group-item">Laden der Daten in den Browser
-							und Suche über Wahllokale und Stimmbezirke mit <a
-							href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a>
-						</li>
-						<li class="list-group-item">Download aufbereiteter
-							Informationen im csv-Format im Bereich Downloads</li>
-					</ul>
-				</div>
+				<p>
+					Der Stimmbezirk ist die kleinste "organisatorische Einheit bei politischen Wahlen" 
+					(vgl. Wikipedia <a href="https://de.wikipedia.org/wiki/Wahlbezirk" target="_blank">Wahlbezirk</a>). 
+					Grundlage für den Service <a href="/wahlgebiet/service/stimmbezirke?geojson&usecache" target="_blank">/wahlgebiet/service/stimmbezirke</a> 
+					ist der Datensatz <a href="https://www.offenedaten-koeln.de/dataset/stimmbezirk" target="_blank">Stimmbezirk JSON (Ab 2016)</a>
+					Zur Verwendung in Webapplikationen werden die Informationen dieses Datensatzes in 
+					das <a href="http://geojson.org/">GeoJson</a> Format umgewandelt.
+				</p>
+				<p>
+					"Das Wahllokal bzw. der Wahlraum ist der öffentliche Ort, an dem eine Wahl durchgeführt wird (...) 
+					Es ist ein Raum, der sich meist in einem öffentlichen Gebäude (Schule oder Rathaus) befindet (...) 
+					Das Wahllokal muss nach demokratischen Grundsätzen ein von Wahlwerbung freier und befriedeter Ort 
+					sein und eine geheime Entscheidung des Wählers in einer Wahlkabine ermöglichen." 
+					(vgl. Wikipedia: <a href="https://de.wikipedia.org/wiki/Wahllokal" target="_blank">Wahllokal</a>)
+					</br>	
+					Grundlage für dieses Projekt sind Informationen, die auf dem Offene Daten Portal der Stadt Köln 
+					zur Verfügung gestellt werden: <a href="https://www.offenedaten-koeln.de/dataset/wahllokale" target="_blank">Offene Daten Köln - Wahllokale</a>.
+				</p>
+				<p>
+					"Ein Wahlkreis ist der – in der Regel geographisch zusammenhängende – Teilraum eines Wahlgebietes, 
+					in dem Wahlberechtigte über die Besetzung eines oder mehrerer Mandate abstimmen. Die zu wählende 
+					Versammlung kann das nationale Parlament oder das eines Gliedstaates sein. Das unterscheidet 
+					den Wahlkreis begrifflich vom Wahlbezirk (Wahlsprengel), der nur eine organisatorische Einheit der 
+					Stimmauszählung ist. Wahlkreise sind spezielle Wahlbezirke." 
+					(vgl. Wikipedia: <a href="https://de.wikipedia.org/wiki/Wahlkreis" target="_blank">Wahlkreis</a>)
+					</br>
+					Grundlage für dieses Projekt sind Informationen, die auf dem Offene Daten Portal der 
+					Stadt Köln zur Verfügung gestellt werden: <a href="https://www.offenedaten-koeln.de/dataset/landtagswahlkreis" target="_blank">Offene Daten Köln - Landtagswahlkreise</a>
+				</p>
 			  </div>
 	           	<div id="disclaimer" class="tab-pane fade text-danger">
 					<p>
@@ -201,6 +191,37 @@
 							href="http://www.mustervorlage.net/homepage-kostenlos">Disclaimer
 							und Websites erstellen</a>
 				</div>
+	           	<div id="featuresabout" class="tab-pane fade">
+					<p>
+						Anzeige der Informationen
+							sowohl im Desktop-Browser, als auch auf Tablet und Smartphone
+							durch Verwendung von <a
+							href="https://github.com/bmcbride/bootleaf" target="_blank">Bootleaf</a>,
+							<a href="http://getbootstrap.com/" target="_blank">Bootstrap
+								3</a> und <a href="http://leafletjs.com/" target="_blank">Leaflet</a>.
+					</p>
+					<p>
+						GPS basierte Verortung, zur
+							Ermittlung des aktuellen Standortes mit <a
+							href="https://www.mapbox.com/mapbox.js/example/v1.0.0/leaflet-locatecontrol/"
+							target="_blank">Mapbox Leaflet Locate</a>
+					</p>
+					<p>
+						Marker clustering von
+							Wahllokalen bei höheren Zoomleveln zur Erhöhung der
+							Anzeigegeschwindigkeit mit <a
+							href="https://github.com/Leaflet/Leaflet.markercluster"
+							target="_blank">Leaflet marker cluster plugin</a>
+					</p>
+					<p>
+						Laden der Daten in den Browser
+							und Suche über Wahllokale und Stimmbezirke mit <a
+							href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a>
+					</p>
+					<p>
+						Download aufbereiteter Informationen im geojson-Format im Bereich Downloads
+					</p>
+				</div>
             </div>
           </div>
           <div class="modal-footer">
@@ -215,42 +236,13 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Map Legend</h4>
+            <h4 class="modal-title">Legende</h4>
           </div>
           <div class="modal-body">
-            <p>Map Legend goes here...</p>
+            <p>TODO: Legende muss eingefügt werden.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Login</h4>
-          </div>
-          <div class="modal-body">
-            <form id="contact-form">
-              <fieldset>
-                <div class="form-group">
-                  <label for="name">Username:</label>
-                  <input type="text" class="form-control" id="username">
-                </div>
-                <div class="form-group">
-                  <label for="email">Password:</label>
-                  <input type="password" class="form-control" id="password">
-                </div>
-              </fieldset>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary" data-dismiss="modal">Login</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -277,7 +269,7 @@
           <div class="modal-header">
             <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">
-              Developed by <a href='http://bryanmcbride.com'>bryanmcbride.com</a>
+              Developed by <a href='https://github.com/weberius'>Wolfram Eberius</a>
             </h4>
           </div>
           <div class="modal-body">

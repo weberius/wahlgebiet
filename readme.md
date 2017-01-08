@@ -1,10 +1,22 @@
 #Wahlgebiet
 
-Das Projekt _wahlgebiet_ stellt Informationen zum Wahlgebiet zur Verfügung. Die Grundlage bieten Resourcen von den [Offenen Daten Köln](https://www.offenedaten-koeln.de/). Zunächst werden die Information zu Stimmbezirk und Wahllokal zur Verfügung gestellt. Perspektivisch sind aber auch Informationen zu Landtagswahlkreis, Stadtteilen und Stadtbezirken möglich. 
+Das Projekt _wahlgebiet_ stellt Informationen zu geographische Strukturen, wie Stimmbezirke, Wahllokale und Landtagswahlkreise zur Verfügung. Die Grundlage bieten Resourcen von den [Offenen Daten Köln](https://www.offenedaten-koeln.de/). 
 
-## Stimmbezirk
+## Stimmbezirke
 
 Der Stimmbezirk ist die kleinste "organisatorische Einheit bei politischen Wahlen" (vgl. Wikipedia [Wahlbezirk](https://de.wikipedia.org/wiki/Wahlbezirk)). Grundlage für den Service _/wahlgebiet/service/stimmbezirke_ ist der Datensatz [Stimmbezirke zur Bundestagswahl](https://www.offenedaten-koeln.de/dataset/stimmbezirk). Zur Verwendung in Webapplikationen werden die Informationen dieses Datensatzes in das [GeoJson](http://geojson.org/) Format umgewandelt.
+
+## Wahllokale
+
+"Das Wahllokal bzw. der Wahlraum ist der öffentliche Ort, an dem eine Wahl durchgeführt wird (...) Es ist ein Raum, der sich meist in einem öffentlichen Gebäude (Schule oder Rathaus) befindet (...) Das Wahllokal muss nach demokratischen Grundsätzen ein von Wahlwerbung freier und befriedeter Ort sein und eine geheime Entscheidung des Wählers in einer Wahlkabine ermöglichen." (vgl. [Wikipedia: Wahllokal](https://de.wikipedia.org/wiki/Wahllokal))
+
+Grundlage für dieses Projekt sind Informationen, die auf dem Offene Daten Portal der Stadt Köln zur Verfügung gestellt werden: [Offene Daten Köln - Wahllokale](https://www.offenedaten-koeln.de/dataset/wahllokale)
+
+## Landtagswahlkreise
+
+"Ein Wahlkreis ist der – in der Regel geographisch zusammenhängende – Teilraum eines Wahlgebietes, in dem Wahlberechtigte über die Besetzung eines oder mehrerer Mandate abstimmen. Die zu wählende Versammlung kann das nationale Parlament oder das eines Gliedstaates sein. Das unterscheidet den Wahlkreis begrifflich vom Wahlbezirk (Wahlsprengel), der nur eine organisatorische Einheit der Stimmauszählung ist. Wahlkreise sind spezielle Wahlbezirke." (vgl. [Wikipedia: Wahlkreis](https://de.wikipedia.org/wiki/Wahlkreis))
+
+Grundlage für dieses Projekt sind Informationen, die auf dem Offene Daten Portal der Stadt Köln zur Verfügung gestellt werden: [Offene Daten Köln - Landtagswahlkreise](https://www.offenedaten-koeln.de/dataset/landtagswahlkreis)
 
 # Entwicklungsstand
 
