@@ -95,7 +95,10 @@ function syncSidebar() {
   wahllokals.eachLayer(function (layer) {
     if (map.hasLayer(wahllokalLayer)) {
       if (map.getBounds().contains(layer.getLatLng())) {
-    	var body = '<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"></td><td class="feature-name">' + layer.feature.properties.WLK_NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>';
+    	var body = '<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '">'
+			+ '<td style="vertical-align: middle;"></td>'
+			+ '<td class="feature-name"><b>Stimmbezirk ' + layer.feature.id + '</b></br>' + layer.feature.properties.WLK_NAME + '</td>'
+			+ '<td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>';
         $("#feature-list tbody").append(body);
       }
     }
@@ -146,14 +149,16 @@ var boroughs = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     boroughSearch.push({
-      name: layer.feature.id + " " + layer.feature.properties.stt,
+      name: layer.feature.id,
+	  stt: layer.feature.properties.stt,
+	  stb: layer.feature.properties.stb,
       source: "Boroughs",
       id: L.stamp(layer),
       bounds: layer.getBounds()
     });
   }
 });
-$.getJSON("/wahlgebiet/service/stimmbezirke?geojson&usecache", function (data) {
+$.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson&usecache", function (data) {
   boroughs.addData(data);
 });
 
@@ -197,7 +202,7 @@ var lwkreis = L.geoJson(null, {
     });
   }
 });
-$.getJSON("/wahlgebiet/service/landtagswahlkreise?geojson", function (data) {
+$.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson", function (data) {
   lwkreis.addData(data);
 });
 
@@ -229,11 +234,11 @@ var wahllokals = L.geoJson(null, {
         + "<table>";
       layer.on({
         click: function (e) {
-          $("#feature-title").html(feature.properties.NAME);
-          $("#feature-info").html(content);
-          $("#featureModal").modal("show");
-          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-          $.getJSON("/wahlgebiet/service/stimmbezirk/" + feature.id + "?geojson", function (stimmbezirkdata) {
+//          $("#feature-title").html(feature.properties.NAME);
+//          $("#feature-info").html(content);
+//          $("#featureModal").modal("show");
+//          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+          $.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/" + feature.id + "?geojson", function (stimmbezirkdata) {
         	  
         	  stimmbezirkLayerGroup.clearLayers();
               var stimmbezirklayer = L.geoJson(stimmbezirkdata, {
@@ -254,8 +259,10 @@ var wahllokals = L.geoJson(null, {
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"></td><td class="feature-name">' + layer.feature.properties.WLK_NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
       wahllokalSearch.push({
-        name: layer.feature.properties.WLK_NAME,
+		name: layer.feature.id,
+        wahllokal: layer.feature.properties.WLK_NAME,
         address: layer.feature.properties.WLK_ADRESSE,
+		plz: layer.feature.properties.POSTZUSTELLBEZIRK,
         source: "Wahllokale",
         id: L.stamp(layer),
         lat: layer.feature.geometry.coordinates[1],
@@ -264,7 +271,7 @@ var wahllokals = L.geoJson(null, {
     }
   }
 });
-$.getJSON("/wahlgebiet/service/wahllokale?geojson&usecache", function (data) {
+$.getJSON("https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson&usecache", function (data) {
   wahllokals.addData(data);
   map.addLayer(wahllokalLayer);
 });
@@ -424,7 +431,7 @@ $(document).one("ajaxStop", function () {
   var wahllokalsBH = new Bloodhound({
     name: "Wahllokale",
     datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.WLK_NAME);
+      return Bloodhound.tokenizers.whitespace(d.name);
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     local: wahllokalSearch,
@@ -444,7 +451,8 @@ $(document).one("ajaxStop", function () {
     displayKey: "stt",
     source: boroughsBH.ttAdapter(),
     templates: {
-      header: "<h4 class='typeahead-header'>Boroughs</h4>"
+      header: "<h4 class='typeahead-header'>Stimmbezirke</h4>",
+	  suggestion: Handlebars.compile(["Stimmbezirk {{name}}<br><small>Stadtbezirk {{stb}}</br>Stadtteil {{stt}}</small>"].join(""))
     }
   }, {
     name: "Wahllokale",
@@ -452,7 +460,7 @@ $(document).one("ajaxStop", function () {
     source: wahllokalsBH.ttAdapter(),
     templates: {
       header: "<h4 class='typeahead-header'>Wahllokale</h4>",
-      suggestion: Handlebars.compile(["{{WLK_NAME}}<br>&nbsp;<small>{{WLK_ADRESSE}}</small>"].join(""))
+      suggestion: Handlebars.compile(["Stimmbezirk {{name}}<br><small>{{wahllokal}}</br>{{address}}</br>{{plz}} K&ouml;ln</small>"].join(""))
     }
   }).on("typeahead:selected", function (obj, datum) {
     if (datum.source === "Boroughs") {
