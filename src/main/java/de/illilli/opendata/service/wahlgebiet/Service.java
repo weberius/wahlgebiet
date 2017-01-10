@@ -122,7 +122,7 @@ public class Service {
 			throws MismatchedDimensionException, JsonProcessingException, NoSuchAuthorityCodeException, IOException,
 			FactoryException, TransformException, SQLException, NamingException {
 
-		logger.info("/stimmbezirk/" + number);
+		logger.info("/wahlgebiet/service/stimmbezirk/" + number);
 		request.setCharacterEncoding(Config.getProperty("encoding"));
 		response.setCharacterEncoding(Config.getProperty("encoding"));
 		boolean isGeojson = request.getParameter("geojson") != null;

@@ -37,14 +37,6 @@ Der Service _/wahlgebiet/service/stimmbezirke?geojson_ liefert alle Stimmbezirke
 
 Der Service _/wahlgebiet/service/stimmbezirke?geojson&usecache_ liefert alle Stimmbezirke im GeoJson Format. Die Informationen werden aus einer bereits erstellten Datei gelesen. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson) zu Benutzung zur Verfügung.
 
-## /wahlgebiet/service/landtagswahlkreise?geojson
-
-Der Service _/wahlgebiet/service/landtagswahlkreise_ liefert alle Landtagswahlkreise im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson) zu Benutzung zur Verfügung.
-
-## /wahlgebiet/service/landtagswahlkreise/{nummer}?geojson
-
-Der Service _/wahlgebiet/service/landtagswahlkreise/{nummer}_ liefert alle Landtagswahlkreise mit den übergebenen Nummern im GeoJson Format. Es ist möglich nur eine Nummer zu übergeben. Es können aber auch mehrere Nummer kommasepariert übergeben werden. Der Service steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson) zu Benutzung zur Verfügung.
-
 ## /wahlgebiet/service/stimmbezirk/{lat}/{lng}
 
 Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}_ liefert die Information zu einem Stimmbezirk in Abhängigkeit einer geolocation. Die Position Information wird im Format EPSG:4326 erwartet.
@@ -54,6 +46,26 @@ Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage er
 Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}?geojson_ liefert die Informationen mit Polygon im Format GeoJson zurück. Die Position Information wird im Format EPSG:4326 erwartet.
 
 Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357?geojson)
+
+## /wahlgebiet/service/stimmbezirk/{number}
+
+Mit dem Service _/wahlgebiet/service/stimmbezirk/{number}_ kann die Information eines Stimmbezirk geladen abgerufen werden, wenn die passende Stimmbezirk-ID bekannt ist.
+
+Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich ermitteln, wenn die Stimmbezirk-ID bekannt ist: [Stimmbezirk für den Kölner Dom (10304)](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/10304)
+
+## /wahlgebiet/service/stimmbezirk/{number}?geojson
+
+Mit dem Service _/wahlgebiet/service/stimmbezirk/{number}?geojson_ kann ein Stimmbezirk geladen werden, wenn die passende Stimmbezirk-ID bekannt ist. Die Ausgabe erfolgt im Format geoJson.
+
+Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich ermitteln, wenn die Stimmbezirk-ID bekannt ist: [Stimmbezirk für den Kölner Dom (10304)](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/10304?geojson)
+
+## /wahlgebiet/service/landtagswahlkreise?geojson
+
+Der Service _/wahlgebiet/service/landtagswahlkreise_ liefert alle Landtagswahlkreise im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson) zu Benutzung zur Verfügung.
+
+## /wahlgebiet/service/landtagswahlkreise/{nummer}?geojson
+
+Der Service _/wahlgebiet/service/landtagswahlkreise/{nummer}_ liefert alle Landtagswahlkreise mit den übergebenen Nummern im GeoJson Format. Es ist möglich nur eine Nummer zu übergeben. Es können aber auch mehrere Nummer kommasepariert übergeben werden. Der Service steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson) zu Benutzung zur Verfügung.
 
 ## /wahlgebiet/service/wahllokale?geojson
 

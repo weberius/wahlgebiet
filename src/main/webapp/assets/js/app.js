@@ -79,7 +79,7 @@ function clearHighlight() {
 
 function sidebarClick(id) {
   var layer = markerClusters.getLayer(id);
-  map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 17);
+  map.setView([layer.getLatLng().lat, layer.getLatLng().lng], 15);
   layer.fire("click");
   /* Hide sidebar and go to the map on small screens */
   if (document.body.clientWidth <= 767) {
@@ -120,7 +120,7 @@ var attr = '<h4>Attribution</h4><a href=\'https://github.com/bmcbride/bootleaf\'
 
 /* Basemap Layers */
 var cartoLight = L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png", {
-  maxZoom: 19,
+  maxZoom: 15,
   attribution: attr
 });
 
@@ -208,6 +208,7 @@ var markerClusters = new L.MarkerClusterGroup({
   zoomToBoundsOnClick: true
 });
 
+var stimmbezirkLayerGroup = new L.LayerGroup();
 
 /* Empty layer placeholder to add to layer control for listening when to add/remove Wahllokale to markerClusters layer */
 var wahllokalLayer = L.geoJson(null);
@@ -222,7 +223,7 @@ var wahllokals = L.geoJson(null, {
     if (feature.properties) {
       var content = "<table class='table table-striped table-bordered table-condensed'>" 
       	+ "<tr><th>Stimmbezirk</th><td>" + feature.id + "</td></tr>" 
-    	+ "<tr><th>Name</th><td>" + feature.properties.WLK_NAME + "</td></tr>" 
+    	+ "<tr><th>Wahllokal</th><td>" + feature.properties.WLK_NAME + "</td></tr>" 
         + "<tr><th>Strasse</th><td>" + feature.properties.WLK_ADRESSE + "</td></tr>" 
         + "<tr><th>Ort</th><td>" + feature.properties.POSTZUSTELLBEZIRK + " K&ouml;ln</td></tr>" 
         + "<table>";
@@ -232,6 +233,23 @@ var wahllokals = L.geoJson(null, {
           $("#feature-info").html(content);
           $("#featureModal").modal("show");
           highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+          $.getJSON("/wahlgebiet/service/stimmbezirk/" + feature.id + "?geojson", function (stimmbezirkdata) {
+        	  
+        	  stimmbezirkLayerGroup.clearLayers();
+              var stimmbezirklayer = L.geoJson(stimmbezirkdata, {
+            	  onEachFeature: function (feature, layer) {
+            		  layer.on({
+            		        click: function (e) {
+            		          $("#feature-title").html(feature.properties.NAME);
+            		          $("#feature-info").html(content);
+            		          $("#featureModal").modal("show");
+            		        }
+            		  });
+            	  }
+              });
+              stimmbezirkLayerGroup.addLayer(stimmbezirklayer);
+              map.addLayer(stimmbezirkLayerGroup);
+          });
         }
       });
       $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"></td><td class="feature-name">' + layer.feature.properties.WLK_NAME + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
