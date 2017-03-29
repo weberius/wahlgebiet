@@ -12,8 +12,7 @@ public class Config {
 	public static String getProperty(String key) {
 		if (properies == null) {
 			properies = new Properties();
-			InputStream inputStream = Config.class
-					.getResourceAsStream(fileName);
+			InputStream inputStream = Config.class.getResourceAsStream(fileName);
 			try {
 				properies.load(inputStream);
 			} catch (IOException e) {

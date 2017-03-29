@@ -1,6 +1,6 @@
 #Wahlgebiet
 
-Das Projekt _wahlgebiet_ stellt Informationen zu geographische Strukturen, wie Stimmbezirke, Wahllokale und Landtagswahlkreise zur Verfügung. Die Grundlage bieten Resourcen von den [Offenen Daten Köln](https://www.offenedaten-koeln.de/). 
+Das Projekt _wahlgebiet_ stellt Informationen zu geographische Strukturen, wie Stimmbezirke, Wahllokale und Wahlkreise zur Verfügung. Die Grundlage bieten verschiedene offener Daten. 
 
 ## Stimmbezirke
 
@@ -12,15 +12,21 @@ Der Stimmbezirk ist die kleinste "organisatorische Einheit bei politischen Wahle
 
 Grundlage für dieses Projekt sind Informationen, die auf dem Offene Daten Portal der Stadt Köln zur Verfügung gestellt werden: [Offene Daten Köln - Wahllokale](https://www.offenedaten-koeln.de/dataset/wahllokale)
 
-## Landtagswahlkreise
+## Wahlkreis
 
 "Ein Wahlkreis ist der – in der Regel geographisch zusammenhängende – Teilraum eines Wahlgebietes, in dem Wahlberechtigte über die Besetzung eines oder mehrerer Mandate abstimmen. Die zu wählende Versammlung kann das nationale Parlament oder das eines Gliedstaates sein. Das unterscheidet den Wahlkreis begrifflich vom Wahlbezirk (Wahlsprengel), der nur eine organisatorische Einheit der Stimmauszählung ist. Wahlkreise sind spezielle Wahlbezirke." (vgl. [Wikipedia: Wahlkreis](https://de.wikipedia.org/wiki/Wahlkreis))
 
-Grundlage für dieses Projekt sind Informationen, die auf dem Offene Daten Portal der Stadt Köln zur Verfügung gestellt werden: [Offene Daten Köln - Landtagswahlkreise](https://www.offenedaten-koeln.de/dataset/landtagswahlkreis)
+### Landtagswahl
+
+
+
+###  Bundestagswahl
+
+"Das Bundesgebiet ist derzeit in 299 Wahlkreise eingeteilt. Die Einteilung des Wahlgebietes in Wahlkreise für die Wahl zum 19. Deutschen Bundestag ist in der Anlage zu Artikel 1 des Dreiundzwanzigsten Gesetzes zur Änderung des Bundeswahlgesetzes (BWG) vom 3. Mai 2016 (BGBl. I S. 1062) beschrieben. Sie ist seit dem 10. Mai 2016 in Kraft getreten." (vgl. [bundeswahlleiter.de: Wahlkreiseinteilung](https://www.bundeswahlleiter.de/bundestagswahlen/2017/wahlkreiseinteilung.html))
 
 # Entwicklungsstand
 
-Dieser Service befinded sich in Entwicklung.
+Dieser Service wird zur Zeit umgebaut und befindet sich in Entwicklung. Die vorhergende Version steht in der Version 1.0 weiterhin zur Verfügung.
 
 [![Build Status](https://api.travis-ci.org/codeforcologne/wahlgebiet.svg?branch=master)](https://travis-ci.org/codeforcologne/wahlgebiet)
 
@@ -29,83 +35,13 @@ Dieser Service befinded sich in Entwicklung.
 
 # Schnittstellen
 
-## /wahlgebiet/service/stimmbezirke?geojson
-
-Der Service _/wahlgebiet/service/stimmbezirke?geojson_ liefert alle Stimmbezirke im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson) zu Benutzung zur Verfügung. Einen grafischen Überblick liefert [https://tom.cologne.codefor.de/wahlgebiet/](https://tom.cologne.codefor.de/wahlgebiet/).
-
-## /wahlgebiet/service/stimmbezirke?geojson&usecache
-
-Der Service _/wahlgebiet/service/stimmbezirke?geojson&usecache_ liefert alle Stimmbezirke im GeoJson Format. Die Informationen werden aus einer bereits erstellten Datei gelesen. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirke?geojson) zu Benutzung zur Verfügung.
-
-## /wahlgebiet/service/stimmbezirk/{lat}/{lng}
-
-Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}_ liefert die Information zu einem Stimmbezirk in Abhängigkeit einer geolocation. Die Position Information wird im Format EPSG:4326 erwartet.
-
-Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357)
-
-Der Service _/wahlgebiet/service/stimmbezirk/{lat}/{lng}?geojson_ liefert die Informationen mit Polygon im Format GeoJson zurück. Die Position Information wird im Format EPSG:4326 erwartet.
-
-Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich über folgende Abfrage ermitteln: [Stimmbezirk für den Kölner Dom](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/6.958307/50.941357?geojson)
-
-## /wahlgebiet/service/stimmbezirk/{number}
-
-Mit dem Service _/wahlgebiet/service/stimmbezirk/{number}_ kann die Information eines Stimmbezirk geladen abgerufen werden, wenn die passende Stimmbezirk-ID bekannt ist.
-
-Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich ermitteln, wenn die Stimmbezirk-ID bekannt ist: [Stimmbezirk für den Kölner Dom (10304)](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/10304)
-
-## /wahlgebiet/service/stimmbezirk/{number}?geojson
-
-Mit dem Service _/wahlgebiet/service/stimmbezirk/{number}?geojson_ kann ein Stimmbezirk geladen werden, wenn die passende Stimmbezirk-ID bekannt ist. Die Ausgabe erfolgt im Format geoJson.
-
-Bsp.: Der Stimmbezirk für den Kölner Dom läßt sich ermitteln, wenn die Stimmbezirk-ID bekannt ist: [Stimmbezirk für den Kölner Dom (10304)](https://tom.cologne.codefor.de/wahlgebiet/service/stimmbezirk/10304?geojson)
-
-## /wahlgebiet/service/landtagswahlkreise?geojson
-
-Der Service _/wahlgebiet/service/landtagswahlkreise_ liefert alle Landtagswahlkreise im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise?geojson) zu Benutzung zur Verfügung.
-
-## /wahlgebiet/service/landtagswahlkreise/{nummer}?geojson
-
-Der Service _/wahlgebiet/service/landtagswahlkreise/{nummer}_ liefert alle Landtagswahlkreise mit den übergebenen Nummern im GeoJson Format. Es ist möglich nur eine Nummer zu übergeben. Es können aber auch mehrere Nummer kommasepariert übergeben werden. Der Service steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/landtagswahlkreise/16,17,18?geojson) zu Benutzung zur Verfügung.
-
-## /wahlgebiet/service/wahllokale?geojson
-
-Der Service _/wahlgebiet/service/wahllokale?geojson_ liefert alle Wahllokale im GeoJson Format. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson](https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson) zur Benutzung zur Verfügung. 
-
-## /wahlgebiet/service/wahllokale?geojson&usecache
-
-Der Service _/wahlgebiet/service/wahllokale?geojson&usecache_ liefert alle Wahllokale im GeoJson Format. Es wird eine bereits erstellte geojson-Datei ausgeliefert. Er steht unter [https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson&usecache](https://tom.cologne.codefor.de/wahlgebiet/service/wahllokale?geojson&usecache) zur Benutzung zur Verfügung. 
-
-## /wahlgebiet/service/load/stimmbezirk
-
-Service zum Einlesen der Stimmbezirke. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
-
-Der Aufruf lautet:
-
-    curl -X PUT http://localhost:8080/wahlgebiet/service/load/stimmbezirk
-
-## /wahlgebiet/service/load/wahllokal
-
-Service zum Einlesen der Wahllokale. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
-
-Der Aufruf lautet:
-
-    curl -X PUT http://localhost:8080/wahlgebiet/service/load/wahllokal
-
-## /wahlgebiet/service/load/landtagswahlkreis
-
-Service zum Einlesen der Landtagswahlkreise. Der Vorgang kann jederzeit wiederholt werden. Bereits existierende Daten werden vorher gelöscht.
-
-Der Aufruf lautet:
-
-    curl -X PUT http://localhost:8080/wahlgebiet/service/load/landtagswahlkreis
-
 # Datenbank
 
 ## DB User auf Postgres einrichten
 
     sudo -u postgres createuser -P wahlgebiet
     
-## Datenbank wahlergebnis anlegen
+## Datenbank wahlgebiet anlegen
 
     sudo -u postgres createdb -O wahlgebiet wahlgebiet
     
@@ -119,7 +55,7 @@ Der Aufruf lautet:
 
 	CREATE TABLE stimmbezirk (
 	    id           varchar(256),
-	    nummber      integer,
+	    nummber      varchar(256),
 	    K_WAHL       integer,
 	    L_Wahl       integer,
 	    B_Wahl       integer,
@@ -154,15 +90,51 @@ Der Aufruf lautet:
     );
     SELECT AddGeometryColumn ('public','wahllokal','geom',4326,'POINT',2);
 
-### landtagswahlkreis
+### wahlgebiet
 
-    CREATE TABLE landtagswahlkreis (
+In der Tabelle werden alle Wahlgebiete gespeichert. Das sind alle Flächen, die sich mit Multipolygonen beschreiben lassen.
+
+| Spalte | Typ | Beschreibung |
+| ------ | --- | ------------ |
+| id | integer | interner Schlüssel für Relation |
+| nummer | integer | Die Nummer des Wahlgebiets |
+| wahl | varchar(256) | Die Art der Wahl, z.B. 'landtagswahl', 'bundestagswahl' |
+| datum | timestamp | Zeitpunkt der Wahl; typischerweise ein Datum, z.B. 24.09.2017 |
+| bezeichnung | varchar(2) | z.B. Name des Wahlkreises |
+| simplify | integer | ganze Zahl gibt darüber Auskunft, ob das Multipolygon simplifiziert vorliegt; 0: nicht simplifiziert, > 0: simplifiziert |
+| modtime | timestamp DEFAULT current_timestamp | Zeitpunkt der Erstellung des Datensatzes |
+
+
+    CREATE TABLE wahlgebiet (
         id                   integer,
 	    nummer               integer,
+	    wahl                 varchar(256),
+	    datum				 timestamp,
         bezeichnung          varchar(256),
+        simplify             integer,
         modtime              timestamp DEFAULT current_timestamp
     );
-    SELECT AddGeometryColumn ('public','landtagswahlkreis','geom',4326,'MULTIPOLYGON',2);
+    SELECT AddGeometryColumn ('public','wahlgebiet','geom',4326,'MULTIPOLYGON',2);
+    
+### eigenschaft
+
+Sind weitere Informationen vorhanden, werden diese 
+    
+| Spalte | Typ | Beschreibung |
+| ------ | --- | ------------ |
+| id | integer | interner Schlüssel für Relation |
+| wahlgebiet | integer | id des wahlgebietes |
+| key | varchar(256) | Die Art der Wahl, z.B. 'landtagswahl', 'bundestagswahl' |
+| value | varchar(256) | Zeitpunkt der Wahl; typischerweise ein Datum, z.B. 24.09.2017 |
+| modtime | timestamp DEFAULT current_timestamp | Zeitpunkt der Erstellung des Datensatzes |
+
+    CREATE TABLE eigenschaft (
+        id                   integer,
+        wahlgebiet           integer,
+        key                  varchar(256),
+        value                varchar(256),
+        modtime              timestamp DEFAULT current_timestamp
+    );
 	
 	
 ## DB-Tabellen initial einrichten
