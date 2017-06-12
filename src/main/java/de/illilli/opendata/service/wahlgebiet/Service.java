@@ -10,7 +10,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import de.illilli.opendata.service.Config;
+import de.illilli.opendata.service.DefaultFacade;
+import de.illilli.opendata.service.Facade;
 
 @Path("/")
 public class Service {
@@ -26,9 +30,10 @@ public class Service {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("/ping")
-	public String getEmpty() {
+	public String getEmpty() throws JsonProcessingException {
 		logger.info("/ping called");
-		return "{\"status\":\"alive\"}";
+		Facade facade = new DefaultFacade(DefaultFacade.INFO, "alive");
+		return facade.getJson();
 	}
 
 }
